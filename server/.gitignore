@@ -1,0 +1,53 @@
+# Node.js specific ignores
+node_modules/
+npm-debug.log
+npm-debug.log.*
+yarn-debug.log
+yarn-error.log
+
+# Editor and IDE configurations
+.vscode/
+.idea/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Build and distribution files
+dist/
+build/
+coverage/
+
+# Sensitive files
+.env
+.env.*
+
+# Lock files
+package-lock.json
+yarn.lock
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+bower_components
+
+# Optional: Ignore your own source control files if you're using Git within a Git repository
+.git
+
+# Ignore test coverage reports
+.coverage/
+
+# Ignore test results
+test-results/
+
+# Ignore generated documentation
+docs/
+
+# Ignore TypeScript build output
+*.js.map
+*.d.ts

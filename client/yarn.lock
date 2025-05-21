@@ -232,6 +232,18 @@
     "@eslint/core" "^0.14.0"
     levn "^0.4.1"
 
+"@ffmpeg/ffmpeg@^0.12.15":
+  version "0.12.15"
+  resolved "https://registry.yarnpkg.com/@ffmpeg/ffmpeg/-/ffmpeg-0.12.15.tgz#e5b05c2b5c946f3464b3aa85461e4654a4649d80"
+  integrity sha512-1C8Obr4GsN3xw+/1Ww6PFM84wSQAGsdoTuTWPOj2OizsRDLT4CXTaVjPhkw6ARyDus1B9X/L2LiXHqYYsGnRFw==
+  dependencies:
+    "@ffmpeg/types" "^0.12.4"
+
+"@ffmpeg/types@^0.12.4":
+  version "0.12.4"
+  resolved "https://registry.yarnpkg.com/@ffmpeg/types/-/types-0.12.4.tgz#aecd9b1a035882ee0bdf8853af37271a3b447473"
+  integrity sha512-k9vJQNBGTxE5AhYDtOYR5rO5fKsspbg51gbcwtbkw2lCdoIILzklulcjJfIDwrtn7XhDeF2M+THwJ2FGrLeV6A==
+
 "@humanfs/core@^0.19.1":
   version "0.19.1"
   resolved "https://registry.yarnpkg.com/@humanfs/core/-/core-0.19.1.tgz#17c55ca7d426733fe3c561906b8173c336b40a77"
@@ -4024,6 +4036,11 @@ wcwidth@^1.0.1:
   integrity sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==
   dependencies:
     defaults "^1.0.3"
+
+webm-to-wav-converter@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/webm-to-wav-converter/-/webm-to-wav-converter-1.1.0.tgz#01479ce3d2e0ded25d8fb34b656fe0429cc98a3b"
+  integrity sha512-fOtPan5a46N3Lss8mPJ8KGgJ0id+Sa7k8Glj6g7Rlt6SBWsLGjgZ3FIO0P1Y+r/GDe5Z/+fgaDGedS6ORPyksQ==
 
 webpack-merge@^6.0.1:
   version "6.0.1"

@@ -15,10 +15,13 @@ export const initializeANewDiscussion = async (
   inData: GSK_SETTINGS_TO_INIT_AI
 ) => {
   const model = xai("grok-3");
-
-  const result = await generateText({
-    model,
-    prompt: "Write a vegetarian lasagna recipe for 4 people.",
-  });
-  console.log(result);
+  try {
+    const result = await generateText({
+      model,
+      prompt: "Write a vegetarian lasagna recipe for 4 people.",
+    });
+    console.log(result);
+  } catch (error) {
+    console.error("Error generating text:", error);
+  }
 };

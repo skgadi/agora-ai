@@ -10,6 +10,7 @@
           type="password"
           outlined
           rounded
+          autofocus
           label="Password to show the admin page"
           class="q-mb-md"
         >

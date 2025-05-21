@@ -114,7 +114,7 @@
       class="q-mt-md full-width"
       @click="
         () => {
-          participants.push({ name: '', company: '', language: '', post: '', role: '' });
+          participants.push({ name: '', company: '', post: '', role: '' });
           editingIdx = participants.length - 1;
         }
       "
@@ -151,7 +151,7 @@ const props = defineProps({
   },
 });
 
-import { type GSK_PARTICIPANT } from 'src/services/library/types';
+import { type GSK_PARTICIPANT } from 'src/services/library/types/participants';
 import { watch } from 'vue';
 import { ref } from 'vue';
 

@@ -29,7 +29,15 @@
           label="Talk Description"
           class="q-mb-md"
         />
-        <q-input v-model="aiRole" type="text" outlined rounded label="AI Role" class="q-mb-md" />
+        <q-input
+          v-model="aiRole"
+          type="text"
+          outlined
+          rounded
+          label="AI Role"
+          :disable="!isEditing"
+          class="q-mb-md"
+        />
         <q-input
           v-model="aiDescription"
           type="textarea"
@@ -47,11 +55,7 @@
           no-caps
           color="primary"
           class="q-mt-md full-width"
-          @click="
-            () => {
-              isEditing = !isEditing;
-            }
-          "
+          @click="sendDataToAI"
         />
       </div>
       <div>
@@ -64,8 +68,12 @@
 import PasswordCheck from 'src/components/Admin/PasswordCheck.vue';
 import ParticipantsEditor from 'src/components/Admin/ParticipantsEditor.vue';
 
-import { type GSK_PARTICIPANT } from 'src/services/library/types';
+import { type GSK_PARTICIPANT } from 'src/services/library/types/participants';
 import { ref } from 'vue';
+import { useSocketStore } from 'src/stores/socket-store';
+import type { GSK_SETTINGS_TO_INIT_AI } from 'src/services/library/types/data-transfer-protocls';
+
+const socketStore = useSocketStore();
 
 const participants = ref<GSK_PARTICIPANT[]>([]);
 
@@ -80,4 +88,28 @@ const aiDescription = ref(
 const conferenceLang = ref('es-MX');
 
 const isEditing = ref(true);
+
+const sendDataToAI = () => {
+  if (!isEditing.value) {
+    isEditing.value = true;
+    return;
+  }
+  isEditing.value = false;
+
+  // Logic to send data to AI
+  const dataToSend: GSK_SETTINGS_TO_INIT_AI = {
+    type: 'GSK_SETTINGS_TO_INIT_AI',
+    payload: {
+      settings: {
+        language: conferenceLang.value,
+        talkTopic: talkTopic.value,
+        talkDescription: talkDescription.value,
+        aiRole: aiRole.value,
+        aiDescription: aiDescription.value,
+        participants: participants.value,
+      },
+    },
+  };
+  socketStore.emit('admin-activities-init-ai', dataToSend);
+};
 </script>

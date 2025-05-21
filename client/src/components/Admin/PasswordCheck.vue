@@ -12,7 +12,11 @@
           rounded
           label="Password to show the admin page"
           class="q-mb-md"
-        />
+        >
+          <template v-slot:prepend>
+            <q-icon name="lock" />
+          </template>
+        </q-input>
       </div>
     </q-page>
   </template>

@@ -13,3 +13,11 @@ export interface GSK_SETTINGS_TO_INIT_AI {
     };
   };
 }
+
+export interface GSK_VOICE_INPUT_TO_SERVER {
+  type: 'GSK_VOICE_INPUT_TO_SERVER';
+  payload: {
+    voiceBlob: Blob;
+    speaker: GSK_PARTICIPANT;
+  };
+}

@@ -121,12 +121,14 @@ defineProps({
   },
 });
 
-import { type GSK_PARTICIPANT } from 'src/services/library/types/participants';
+import type { GSK_PARTICIPANT } from 'src/services/library/types/participants';
 import { computed, ref } from 'vue';
 import { useQuasar } from 'quasar';
-import { getWaveBlob } from 'webm-to-wav-converter';
+import type { GSK_VOICE_INPUT_TO_SERVER } from 'src/services/library/types/data-transfer-protocls';
+import { useSocketStore } from 'src/stores/socket-store';
 
 const $q = useQuasar();
+const socketStore = useSocketStore();
 
 const isRecording = ref(false);
 const recordingIdx = ref(-1);
@@ -190,8 +192,8 @@ async function toggleRecording(idx: number) {
       mediaRecorder.value.onstop = async () => {
         try {
           const audioBlob = new Blob(audioChunks.value, { type: supportedAudioFormat.value });
-          audioUrl.value = URL.createObjectURL(audioBlob);
-          const wavBlob = await getWaveBlob(audioChunks.value, false);
+          const wavBlob = await convertWebmToWav(audioBlob);
+          audioUrl.value = URL.createObjectURL(wavBlob);
           sendToServer({
             participantIdx: recordedIdx.value,
             wavBlob,
@@ -234,6 +236,14 @@ interface GSK_SERVER_DETAILS {
 }
 
 const sendToServer = (inDetails: GSK_SERVER_DETAILS) => {
+  const payload: GSK_VOICE_INPUT_TO_SERVER = {
+    type: 'GSK_VOICE_INPUT_TO_SERVER',
+    payload: {
+      voiceBlob: inDetails.wavBlob,
+      speaker: getParticipant(inDetails.participantIdx),
+    },
+  };
+  socketStore.emit('admin-activities-voice-input-to-server', payload);
   console.log('send to server with the following details ', inDetails);
   $q.notify({
     type: 'positive',
@@ -242,7 +252,7 @@ const sendToServer = (inDetails: GSK_SERVER_DETAILS) => {
 };
 
 const getParticipantName = (idx: number) => {
-  return `Idx: ${idx}, Name: ${participants.value?.[idx]?.name || ''}`;
+  return getParticipant(idx).name;
 };
 
 const supportedAudioFormat = computed(() => {
@@ -263,4 +273,80 @@ const supportedAudioFormat = computed(() => {
   }
   return 'audio/webm'; // Default fallback if none are supported
 });
+
+async function convertWebmToWav(webmBlob: Blob): Promise<Blob> {
+  const arrayBuffer = await webmBlob.arrayBuffer();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+  const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+  const wavBuffer = audioBufferToWav(audioBuffer);
+  return new Blob([wavBuffer], { type: 'audio/wav' });
+}
+
+function audioBufferToWav(buffer: AudioBuffer): ArrayBuffer {
+  const numOfChan = buffer.numberOfChannels;
+  const length = buffer.length * numOfChan * 2;
+  const bufferSound = new ArrayBuffer(44 + length);
+  const view = new DataView(bufferSound);
+  const channels = [];
+  let pos = 0;
+  let offset = 0;
+
+  writeString('RIFF');
+  view.setUint32(pos, 36 + length, true);
+  pos += 4;
+  writeString('WAVE');
+  writeString('fmt ');
+  view.setUint32(pos, 16, true);
+  pos += 4;
+  view.setUint16(pos, 1, true);
+  pos += 2;
+  view.setUint16(pos, numOfChan, true);
+  pos += 2;
+  view.setUint32(pos, buffer.sampleRate, true);
+  pos += 4;
+  view.setUint32(pos, buffer.sampleRate * 2 * numOfChan, true);
+  pos += 4;
+  view.setUint16(pos, numOfChan * 2, true);
+  pos += 2;
+  view.setUint16(pos, 16, true);
+  pos += 2;
+  writeString('data');
+  view.setUint32(pos, length, true);
+  pos += 4;
+
+  for (let i = 0; i < buffer.numberOfChannels; i++) {
+    channels.push(buffer.getChannelData(i));
+  }
+
+  while (pos < bufferSound.byteLength) {
+    for (let i = 0; i < numOfChan; i++) {
+      let sample = Math.max(-1, Math.min(1, channels?.[i]?.[offset] || 0));
+      sample = sample < 0 ? sample * 0x8000 : sample * 0x7fff;
+      view.setInt16(pos, sample, true);
+      pos += 2;
+    }
+    offset++;
+  }
+
+  function writeString(str: string) {
+    for (let i = 0; i < str.length; i++) {
+      view.setUint8(pos + i, str.charCodeAt(i));
+    }
+    pos += str.length;
+  }
+
+  return bufferSound;
+}
+
+const getParticipant = (idx: number) => {
+  return (
+    participants.value?.[idx] || {
+      name: '',
+      company: '',
+      post: '',
+      role: '',
+    }
+  );
+};
 </script>

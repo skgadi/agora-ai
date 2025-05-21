@@ -51,3 +51,6 @@ docs/
 # Ignore TypeScript build output
 *.js.map
 *.d.ts
+
+# Ignore temporary files
+tmp/

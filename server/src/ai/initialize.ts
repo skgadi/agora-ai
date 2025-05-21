@@ -1,27 +1,8 @@
-import { createXai } from "@ai-sdk/xai";
-import { generateText } from "ai";
+import dotenv from "dotenv";
+dotenv.config();
 
-import { GSK_SETTINGS_TO_INIT_AI } from "../services/library/types/data-transfer-protocls";
+const myGeminiApi = process.env.MY_GEMINI_API_KEY || "default_api_key"; // Replace with your actual API key
 
-require("dotenv").config();
-
-const myAPIKey = process.env.MY_API_KEY || "default_api_key"; // Replace with your actual API key
-
-const xai = createXai({
-  apiKey: myAPIKey,
-});
-
-export const initializeANewDiscussion = async (
-  inData: GSK_SETTINGS_TO_INIT_AI
-) => {
-  const model = xai("grok-3");
-  try {
-    const result = await generateText({
-      model,
-      prompt: "Write a vegetarian lasagna recipe for 4 people.",
-    });
-    console.log(result);
-  } catch (error) {
-    console.error("Error generating text:", error);
-  }
+export const testMain = async () => {
+  console.log("myGeminiApi", myGeminiApi);
 };

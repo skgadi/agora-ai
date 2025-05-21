@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@ai-sdk/xai": "^1.2.16",
+    "@google/genai": "^1.0.0",
     "ai": "^4.3.16",
     "dotenv": "^16.5.0"
   }

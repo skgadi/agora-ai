@@ -2,15 +2,40 @@
   <q-markup-table>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Affiliation</th>
+        <th>Type</th>
         <th>Role</th>
+        <th>Name</th>
+        <th>Bio</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <template v-for="(participant, idx) in participants" :key="idx">
         <tr>
+          <td>
+            <q-select
+              v-model="participant.type"
+              :options="optionsForType"
+              dense
+              outlined
+              rounded
+              :disable="!editable"
+              emit-value
+              map-options
+            />
+          </td>
+          <td>
+            <q-select
+              v-model="participant.role"
+              :options="roles"
+              dense
+              outlined
+              rounded
+              :disable="!editable"
+              emit-value
+              map-options
+            />
+          </td>
           <td>
             <q-input
               v-model="participant.name"
@@ -23,18 +48,8 @@
           </td>
           <td>
             <q-input
-              v-model="participant.post"
-              type="text"
-              dense
-              outlined
-              rounded
-              :disable="!editable"
-            />
-          </td>
-          <td>
-            <q-input
-              v-model="participant.role"
-              type="text"
+              v-model="participant.bio"
+              type="textarea"
               dense
               outlined
               rounded
@@ -81,7 +96,16 @@
       class="q-mt-md full-width"
       @click="
         () => {
-          participants.push({ name: '', company: '', post: '', role: '' });
+          participants.push({
+            name: '',
+            bio: '',
+            type: 'us-female',
+            role: '',
+            avatarIdle: '',
+            avatarTalking: '',
+            avatarListening: '',
+            avatarThinking: '',
+          });
         }
       "
     />
@@ -114,14 +138,22 @@ const participants = defineModel<GSK_PARTICIPANT[]>({
   required: true,
 });
 
-defineProps({
+const props = defineProps({
+  fullEventData: {
+    type: Object as () => GSK_FULL_EVENT_DATA,
+    required: true,
+  },
   editable: {
     type: Boolean,
     default: true,
   },
 });
 
-import type { GSK_PARTICIPANT } from 'src/services/library/types/participants';
+import {
+  gsk_types,
+  type GSK_PARTICIPANT,
+  type GSK_FULL_EVENT_DATA,
+} from 'src/services/library/types/participants';
 import { computed, ref } from 'vue';
 import { useQuasar } from 'quasar';
 import type { GSK_VOICE_INPUT_TO_SERVER } from 'src/services/library/types/data-transfer-protocls';
@@ -341,12 +373,43 @@ function audioBufferToWav(buffer: AudioBuffer): ArrayBuffer {
 
 const getParticipant = (idx: number) => {
   return (
-    participants.value?.[idx] || {
+    participants.value?.[idx] ||
+    ({
+      avatarIdle: '',
+      avatarListening: '',
+      avatarThinking: '',
+      avatarTalking: '',
       name: '',
-      company: '',
-      post: '',
+      bio: '',
+      type: 'us-female',
       role: '',
-    }
+    } as GSK_PARTICIPANT)
   );
 };
+
+const optionsForType = (() => {
+  const options = [
+    {
+      label: 'Human',
+      value: 'human',
+    },
+  ];
+  (Object.keys(gsk_types) as Array<keyof typeof gsk_types>).forEach((key) => {
+    const type = gsk_types[key];
+    options.push({
+      label: type.name,
+      value: key,
+    });
+  });
+  return options;
+})();
+
+const roles = computed(() => {
+  return props.fullEventData.roles.map((role) => ({
+    label: role.name,
+    value: role.name,
+  }));
+});
+
+console.log('optionsForType', optionsForType);
 </script>

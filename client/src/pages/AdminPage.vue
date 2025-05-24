@@ -1,6 +1,23 @@
 <template>
   <password-check>
-    <q-page class="row items-center justify-evenly">
+    <q-page class="q-pa-md">
+      <q-list bordered class="rounded-borders">
+        <q-expansion-item
+          expand-separator
+          icon="groups"
+          label="Participants editor"
+          :caption="`Total: ${fullEventData.participants.length}; AI participants: ${fullEventData.participants.filter((p) => p.type !== 'human').length} `"
+        >
+          <div class="q-ma-md">
+            <participants-editor
+              v-model="fullEventData.participants"
+              :editable="isEditing"
+              :full-event-data="fullEventData"
+            />
+          </div>
+        </q-expansion-item>
+      </q-list>
+
       <div style="min-width: 300px">
         <q-input
           v-model="conferenceLang"
@@ -58,9 +75,7 @@
           @click="sendDataToAI"
         />
       </div>
-      <div>
-        <participants-editor v-model="participants" :editable="isEditing" />
-      </div>
+      <div></div>
     </q-page>
   </password-check>
 </template>
@@ -68,14 +83,69 @@
 import PasswordCheck from 'src/components/Admin/PasswordCheck.vue';
 import ParticipantsEditor from 'src/components/Admin/ParticipantsEditor.vue';
 
-import { type GSK_PARTICIPANT } from 'src/services/library/types/participants';
+import type { GSK_FULL_EVENT_DATA } from 'src/services/library/types/participants';
 import { ref } from 'vue';
 import { useSocketStore } from 'src/stores/socket-store';
 import type { GSK_SETTINGS_TO_INIT_AI } from 'src/services/library/types/data-transfer-protocls';
 
 const socketStore = useSocketStore();
 
-const participants = ref<GSK_PARTICIPANT[]>([]);
+//const participants = ref<GSK_PARTICIPANT[]>([]);
+const fullEventData = ref<GSK_FULL_EVENT_DATA>({
+  event: {
+    name: 'GSK AI Conference 2023',
+    description:
+      'Join us for an exciting conference on the latest advancements in AI technology at GSK. Our expert speakers will share insights and knowledge on various AI applications in the pharmaceutical industry.',
+    dynamics: '',
+  },
+  participants: [
+    {
+      type: 'us-female',
+      avatarIdle: '',
+      avatarListening: '',
+      avatarThinking: '',
+      avatarTalking: '',
+
+      name: 'John Doe',
+      bio: 'AI Expert with 10 years of experience in the pharmaceutical industry.',
+      role: 'Moderator',
+    },
+    {
+      type: 'us-male',
+      avatarIdle: '',
+      avatarListening: '',
+      avatarThinking: '',
+      avatarTalking: '',
+
+      name: 'Jane Smith',
+      bio: 'Data Scientist with a focus on AI applications in healthcare.',
+      role: 'Panelist',
+    },
+    {
+      type: 'human',
+      avatarIdle: '',
+      avatarListening: '',
+      avatarThinking: '',
+      avatarTalking: '',
+
+      name: 'Alice Johnson',
+      bio: 'Machine Learning Engineer with a passion for AI in drug discovery.',
+      role: 'Panelist',
+    },
+  ],
+  roles: [
+    {
+      name: 'Moderator',
+      description:
+        'Facilitates the discussion and ensures that all participants have a chance to speak.',
+    },
+    {
+      name: 'Panelist',
+      description:
+        'Engages in discussions and shares expertise on AI applications in the pharmaceutical industry.',
+    },
+  ],
+});
 
 const talkTopic = ref('GSK AI Conference 2023');
 const talkDescription = ref(
@@ -99,16 +169,7 @@ const sendDataToAI = () => {
   // Logic to send data to AI
   const dataToSend: GSK_SETTINGS_TO_INIT_AI = {
     type: 'GSK_SETTINGS_TO_INIT_AI',
-    payload: {
-      settings: {
-        language: conferenceLang.value,
-        talkTopic: talkTopic.value,
-        talkDescription: talkDescription.value,
-        aiRole: aiRole.value,
-        aiDescription: aiDescription.value,
-        participants: participants.value,
-      },
-    },
+    payload: fullEventData.value,
   };
   socketStore.emit('admin-activities-init-ai', dataToSend);
 };

@@ -1,9 +1,9 @@
-import { testMain } from "../ai/initialize";
+import { testMain } from "../ai/main.js";
 
 import {
   GSK_SETTINGS_TO_INIT_AI,
   GSK_VOICE_INPUT_TO_SERVER,
-} from "../services/library/types/data-transfer-protocls";
+} from "../services/library/types/data-transfer-protocls.js";
 
 import * as path from "path";
 

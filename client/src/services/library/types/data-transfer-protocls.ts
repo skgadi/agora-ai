@@ -1,17 +1,8 @@
-import { type GSK_PARTICIPANT } from './participants';
+import type { GSK_PARTICIPANT, GSK_FULL_EVENT_DATA } from './participants';
 
 export interface GSK_SETTINGS_TO_INIT_AI {
   type: 'GSK_SETTINGS_TO_INIT_AI';
-  payload: {
-    settings: {
-      language: string;
-      talkTopic: string;
-      talkDescription: string;
-      aiRole: string;
-      aiDescription: string;
-      participants: GSK_PARTICIPANT[];
-    };
-  };
+  payload: GSK_FULL_EVENT_DATA;
 }
 
 export interface GSK_VOICE_INPUT_TO_SERVER {

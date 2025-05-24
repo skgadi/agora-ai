@@ -5,15 +5,16 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/server.js",
-    "dev": "nodemon --exec ts-node src/server.ts",
+    "dev": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "module",
   "devDependencies": {
     "@types/express": "^5.0.2",
-    "@types/node": "^22.15.20",
+    "@types/node": "^22.15.21",
     "@types/socket.io": "^3.0.1",
     "express": "^5.1.0",
     "nodemon": "^3.1.10",

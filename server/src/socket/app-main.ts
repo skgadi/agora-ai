@@ -1,4 +1,4 @@
-import { joinMainRoom } from "../socket-rooms/main-room";
+import { joinMainRoom } from "../socket-rooms/main-room.js";
 
 const mainAppSocketRoutines = async (io: any, socket: any) => {
   socket.on("app-init", async () => {

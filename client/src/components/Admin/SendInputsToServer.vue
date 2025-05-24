@@ -60,7 +60,11 @@ import {
 } from 'src/services/library/types/participants';
 import { computed, ref } from 'vue';
 import { useQuasar } from 'quasar';
-import type { GSK_VOICE_INPUT_TO_SERVER } from 'src/services/library/types/data-transfer-protocls';
+import type {
+  GSK_REQUEST_AI_TO_START_TALKING,
+  GSK_REQUEST_AI_TO_STOP_TALKING,
+  GSK_VOICE_INPUT_TO_SERVER,
+} from 'src/services/library/types/data-transfer-protocls';
 import { useSocketStore } from 'src/stores/socket-store';
 
 const $q = useQuasar();
@@ -181,11 +185,11 @@ const requestAIToTalk = (idx: number) => {
     }
     console.log('requst AI to talk from server');
     socketStore.emit('admin-activities-start-ai-voice', {
-      type: 'GSK_VOICE_INPUT_TO_SERVER',
+      type: 'GSK_REQUEST_AI_TO_START_TALKING',
       payload: {
-        speaker: getParticipant(idx),
+        speakerIdx: idx,
       },
-    });
+    } as GSK_REQUEST_AI_TO_START_TALKING);
   }
 };
 
@@ -197,11 +201,11 @@ const requestAIToStopTalking = (idx: number) => {
     }
     console.log('requst AI to stop talking from server');
     socketStore.emit('admin-activities-stop-ai-voice', {
-      type: 'GSK_VOICE_INPUT_TO_SERVER',
+      type: 'GSK_REQUEST_AI_TO_STOP_TALKING',
       payload: {
-        speaker: getParticipant(idx),
+        speakerIdx: idx,
       },
-    });
+    } as GSK_REQUEST_AI_TO_STOP_TALKING);
   }
 };
 
@@ -217,7 +221,7 @@ const sendToServer = (inDetails: GSK_SERVER_DETAILS) => {
     type: 'GSK_VOICE_INPUT_TO_SERVER',
     payload: {
       voiceBlob: inDetails.wavBlob,
-      speaker: getParticipant(inDetails.participantIdx),
+      speakerIdx: inDetails.participantIdx,
     },
   };
   socketStore.emit('admin-activities-voice-input-to-server', payload);

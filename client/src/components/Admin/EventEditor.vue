@@ -1,4 +1,14 @@
 <template>
+  <q-select
+    v-model="event.language"
+    :options="optionsForLanguage"
+    outlined
+    rounded
+    :disable="!editable"
+    label="Event Language"
+    emit-value
+    map-options
+  />
   <q-input
     v-model="event.name"
     type="text"
@@ -69,5 +79,5 @@ defineProps({
   },
 });
 
-import { type GSK_EVENT } from 'src/services/library/types/participants';
+import { optionsForLanguage, type GSK_EVENT } from 'src/services/library/types/participants';
 </script>

@@ -47,6 +47,7 @@
           no-caps
           color="primary"
           class="q-mt-md full-width"
+          :disable="!socketStore.isConnected"
           @click="startStopShow"
         />
       </q-page>
@@ -75,7 +76,7 @@ import RolesEditor from 'src/components/Admin/RolesEditor.vue';
 import SendInputsToServer from 'src/components/Admin/SendInputsToServer.vue';
 
 import type { GSK_FULL_EVENT_DATA } from 'src/services/library/types/participants';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useSocketStore } from 'src/stores/socket-store';
 import type { GSK_SETTINGS_TO_INIT_AI } from 'src/services/library/types/data-transfer-protocls';
 
@@ -84,10 +85,12 @@ const socketStore = useSocketStore();
 //const participants = ref<GSK_PARTICIPANT[]>([]);
 const fullEventData = ref<GSK_FULL_EVENT_DATA>({
   event: {
+    background: '',
     name: 'GSK AI Conference 2023',
     description:
       'Join us for an exciting conference on the latest advancements in AI technology at GSK. Our expert speakers will share insights and knowledge on various AI applications in the pharmaceutical industry.',
     dynamics: '',
+    language: 'en-US',
   },
   participants: [
     {
@@ -162,8 +165,18 @@ const startStopShow = () => {
   // Logic to send data to AI
   const dataToSend: GSK_SETTINGS_TO_INIT_AI = {
     type: 'GSK_SETTINGS_TO_INIT_AI',
-    payload: fullEventData.value,
+    fullEventData: fullEventData.value,
   };
   socketStore.emit('admin-activities-init-ai', dataToSend);
 };
+
+watch(
+  () => socketStore.isConnected,
+  () => {
+    if (!socketStore.isConnected) {
+      isEditing.value = true;
+    }
+  },
+  { immediate: true },
+);
 </script>

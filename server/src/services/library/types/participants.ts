@@ -18,6 +18,8 @@ export interface GSK_EVENT {
   name: string;
   description: string;
   dynamics: string;
+  background: string;
+  language: "en-US" | "es-MX";
 }
 
 export interface GSK_FULL_EVENT_DATA {
@@ -54,3 +56,14 @@ export const gsk_types = {
     accent: "es-MX",
   },
 };
+
+export const optionsForLanguage = [
+  {
+    label: "English (US)",
+    value: "en-US",
+  },
+  {
+    label: "Spanish (MX)",
+    value: "es-MX",
+  },
+];

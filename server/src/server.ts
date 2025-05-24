@@ -7,7 +7,9 @@ dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  maxHttpBufferSize: 1e9, // 1 GB
+});
 
 // Serve static files if needed
 app.use(express.static("public"));

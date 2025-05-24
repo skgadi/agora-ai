@@ -1,4 +1,7 @@
 <template>
+  <div class="text-center q-mb-md">
+    <select-image v-model="event.background" :isDisabled="!editable" />
+  </div>
   <q-select
     v-model="event.language"
     :options="optionsForLanguage"
@@ -78,6 +81,8 @@ defineProps({
     default: true,
   },
 });
+
+import SelectImage from 'src/components/Generic/SelectImage.vue';
 
 import { optionsForLanguage, type GSK_EVENT } from 'src/services/library/types/participants';
 </script>

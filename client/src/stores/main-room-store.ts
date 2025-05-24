@@ -16,6 +16,10 @@ export const useMainRoomStore = defineStore('mainRoom', {
       const text = state.textToSpeak.pop();
       return text ? text : null;
     },
+    bots: (state) => {
+      if (!state.fullEventData) return [];
+      return state.fullEventData.participants.filter((participant) => participant.type !== 'human');
+    },
   },
 
   actions: {

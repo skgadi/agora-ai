@@ -80,6 +80,7 @@
           </td>
           <td class="text-center">
             <template v-if="editable">
+              <select-image v-model="participant.avatarIdle" :is-disabled="!editable" size="50px" />
               <q-btn
                 icon="delete"
                 round
@@ -138,6 +139,8 @@ const props = defineProps({
     default: true,
   },
 });
+
+import SelectImage from 'src/components/Generic/SelectImage.vue';
 
 import {
   gsk_types,

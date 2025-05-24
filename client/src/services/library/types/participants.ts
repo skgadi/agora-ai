@@ -9,7 +9,7 @@ export interface GSK_PARTICIPANT {
   avatarTalking: string;
 }
 
-export interface GSK_ROLES {
+export interface GSK_ROLE {
   name: string;
   description: string;
 }
@@ -23,7 +23,7 @@ export interface GSK_EVENT {
 export interface GSK_FULL_EVENT_DATA {
   event: GSK_EVENT;
   participants: GSK_PARTICIPANT[];
-  roles: GSK_ROLES[];
+  roles: GSK_ROLE[];
 }
 
 export interface GSK_TYPES {

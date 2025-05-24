@@ -1,69 +1,44 @@
 <template>
   <password-check>
-    <q-page class="q-pa-md">
-      <q-list bordered class="rounded-borders">
-        <q-expansion-item
-          expand-separator
-          icon="groups"
-          label="Participants editor"
-          :caption="`Total: ${fullEventData.participants.length}; AI participants: ${fullEventData.participants.filter((p) => p.type !== 'human').length} `"
-        >
-          <div class="q-ma-md">
-            <participants-editor
-              v-model="fullEventData.participants"
-              :editable="isEditing"
-              :full-event-data="fullEventData"
-            />
-          </div>
-        </q-expansion-item>
-      </q-list>
+    <template v-if="isEditing">
+      <q-page class="q-pa-md">
+        <q-list bordered separator class="rounded-borders">
+          <q-expansion-item
+            expand-separator
+            icon="event"
+            label="Event editor"
+            :caption="`Name: ${fullEventData.event.name}`"
+          >
+            <div class="q-pa-md">
+              <event-editor v-model="fullEventData.event" :editable="isEditing" />
+            </div>
+          </q-expansion-item>
+          <q-expansion-item
+            expand-separator
+            icon="category"
+            label="Roles editor"
+            :caption="`Total: ${fullEventData.roles.length}`"
+          >
+            <div class="q-pa-md">
+              <roles-editor v-model="fullEventData.roles" :editable="isEditing" />
+            </div>
+          </q-expansion-item>
+          <q-expansion-item
+            expand-separator
+            icon="groups"
+            label="Participants editor"
+            :caption="`Total: ${fullEventData.participants.length}; AI participants: ${fullEventData.participants.filter((p) => p.type !== 'human').length} `"
+          >
+            <div class="q-pa-md">
+              <participants-editor
+                v-model="fullEventData.participants"
+                :editable="isEditing"
+                :full-event-data="fullEventData"
+              />
+            </div>
+          </q-expansion-item>
+        </q-list>
 
-      <div style="min-width: 300px">
-        <q-input
-          v-model="conferenceLang"
-          type="text"
-          outlined
-          rounded
-          :disable="!isEditing"
-          label="Conference Language"
-          class="q-mb-md"
-        />
-        <q-input
-          v-model="talkTopic"
-          type="text"
-          outlined
-          rounded
-          :disable="!isEditing"
-          label="Talk Topic"
-          class="q-mb-md"
-        />
-        <q-input
-          v-model="talkDescription"
-          type="textarea"
-          outlined
-          rounded
-          :disable="!isEditing"
-          label="Talk Description"
-          class="q-mb-md"
-        />
-        <q-input
-          v-model="aiRole"
-          type="text"
-          outlined
-          rounded
-          label="AI Role"
-          :disable="!isEditing"
-          class="q-mb-md"
-        />
-        <q-input
-          v-model="aiDescription"
-          type="textarea"
-          outlined
-          rounded
-          :disable="!isEditing"
-          label="AI Description"
-          class="q-mb-md"
-        />
         <q-btn
           :label="isEditing ? 'Send data to AI' : 'Edit data'"
           :icon="isEditing ? 'send' : 'edit'"
@@ -72,16 +47,32 @@
           no-caps
           color="primary"
           class="q-mt-md full-width"
-          @click="sendDataToAI"
+          @click="startStopShow"
         />
-      </div>
-      <div></div>
-    </q-page>
+      </q-page>
+    </template>
+    <template v-else>
+      <q-page class="row items-center justify-center">
+        <div class="full-width q-pa-md">
+          <send-inputs-to-server
+            v-model="fullEventData.participants"
+            :editable="isEditing"
+            :full-event-data="fullEventData"
+          />
+        </div>
+        <q-page-sticky position="bottom-right" :offset="[18, 18]">
+          <q-btn fab icon="close" color="negative" @click="startStopShow" />
+        </q-page-sticky>
+      </q-page>
+    </template>
   </password-check>
 </template>
 <script setup lang="ts">
 import PasswordCheck from 'src/components/Admin/PasswordCheck.vue';
 import ParticipantsEditor from 'src/components/Admin/ParticipantsEditor.vue';
+import EventEditor from 'src/components/Admin/EventEditor.vue';
+import RolesEditor from 'src/components/Admin/RolesEditor.vue';
+import SendInputsToServer from 'src/components/Admin/SendInputsToServer.vue';
 
 import type { GSK_FULL_EVENT_DATA } from 'src/services/library/types/participants';
 import { ref } from 'vue';
@@ -147,23 +138,25 @@ const fullEventData = ref<GSK_FULL_EVENT_DATA>({
   ],
 });
 
-const talkTopic = ref('GSK AI Conference 2023');
-const talkDescription = ref(
-  'Join us for an exciting conference on the latest advancements in AI technology at GSK. Our expert speakers will share insights and knowledge on various AI applications in the pharmaceutical industry.',
-);
-const aiRole = ref('Panelist');
-const aiDescription = ref(
-  'As a panelist, you will engage in discussions and share your expertise on AI applications in the pharmaceutical industry. You will have the opportunity to interact with other experts and contribute to the advancement of AI technology at GSK.',
-);
-const conferenceLang = ref('es-MX');
-
 const isEditing = ref(true);
 
-const sendDataToAI = () => {
+const startStopShow = () => {
   if (!isEditing.value) {
+    // confirm before stopping
+    const confirmStop = confirm('Are you sure you want to stop the show?');
+    if (!confirmStop) {
+      return;
+    }
     isEditing.value = true;
     return;
   }
+
+  // confirm before starting
+  const confirmStart = confirm('Are you sure you want to start the show?');
+  if (!confirmStart) {
+    return;
+  }
+
   isEditing.value = false;
 
   // Logic to send data to AI

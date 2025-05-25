@@ -21,10 +21,12 @@
       @click="userInteractionButtonPressed = true"
     />
   </template>
+  <watermark-logo />
 </template>
 <script setup lang="ts">
 import ConnectivityIndicator from 'src/components/Generic/ConnectivityIndicator.vue';
 import UpdateRibbon from 'components/Generic/UpdateRibbon.vue';
+import WatermarkLogo from 'src/components/Generic/WatermarkLogo.vue';
 
 import { onMounted } from 'vue';
 import { useSocketStore } from 'src/stores/socket-store';

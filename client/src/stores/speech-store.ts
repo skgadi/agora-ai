@@ -10,6 +10,7 @@ export const useSpeechStore = defineStore('speechStore', {
     textToSpeak: '' as string,
     speakerIdx: -1 as number,
     isSpeakingWindow: false as boolean,
+    keepSpeechAliveTimeInterval: null as NodeJS.Timeout | null,
   }),
 
   getters: {
@@ -68,6 +69,11 @@ export const useSpeechStore = defineStore('speechStore', {
           const mainRoomStore = useMainRoomStore();
           mainRoomStore.setTalkingState();
           console.log('Speech started');
+          this.keepSpeechAliveTimeInterval = setInterval(() => {
+            if (this.isSpeakingActivityInProgress) {
+              window.speechSynthesis.resume();
+            }
+          }, 14000);
         };
         utterance.onend = () => {
           const mainRoomStore = useMainRoomStore();
@@ -75,6 +81,10 @@ export const useSpeechStore = defineStore('speechStore', {
           this.isSpeakingActivityInProgress = false;
           this.speakerIdx = -1;
           mainRoomStore.clearTextToSpeak();
+          if (this.keepSpeechAliveTimeInterval) {
+            clearInterval(this.keepSpeechAliveTimeInterval);
+            this.keepSpeechAliveTimeInterval = null;
+          }
         };
         utterance.onerror = (event) => {
           const mainRoomStore = useMainRoomStore();
@@ -83,6 +93,10 @@ export const useSpeechStore = defineStore('speechStore', {
           this.textToSpeak = '';
           this.speakerIdx = -1;
           mainRoomStore.clearTextToSpeak();
+          if (this.keepSpeechAliveTimeInterval) {
+            clearInterval(this.keepSpeechAliveTimeInterval);
+            this.keepSpeechAliveTimeInterval = null;
+          }
         };
         window.speechSynthesis.speak(utterance);
       }

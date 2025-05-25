@@ -26,6 +26,7 @@ const speechStore = useSpeechStore();
 
 window.speechSynthesis.onvoiceschanged = () => {
   speechStore.loadVoicesIfNotLoaded();
+  speechStore.isSpeakingWindow = false;
 };
 
 onMounted(() => {

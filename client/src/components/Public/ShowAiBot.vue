@@ -1,6 +1,8 @@
 <template>
   <div class="image-container">
-    <div class="text-h6 text-visible text-center">{{ bot.name }} ({{ myState }})</div>
+    <div class="text-h6 text-visible text-center">
+      {{ bot.name }} {{ speechStore.isSpeakingWindow }} ({{ myState }})
+    </div>
     <q-img class="responsive-image" :src="getAvatar" />
   </div>
 </template>
@@ -19,9 +21,11 @@ const props = defineProps({
 import type { GSK_PARTICIPANT } from 'src/services/library/types/participants';
 import defaultAvatar from 'assets/defualt-avatar.png'; // Correct path using @ alias
 import { useMainRoomStore } from 'src/stores/main-room-store';
+import { useSpeechStore } from 'src/stores/speech-store';
 import { computed } from 'vue';
 
 const mainRoomStore = useMainRoomStore();
+const speechStore = useSpeechStore();
 
 const myState = computed(() => {
   if (mainRoomStore.speakerIdx === props.myIndex) {

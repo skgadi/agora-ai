@@ -9,7 +9,7 @@ export const useSpeechStore = defineStore('speechStore', {
     isSpeakingActivityInProgress: false as boolean,
     textToSpeak: '' as string,
     speakerIdx: -1 as number,
-    utterance: null as SpeechSynthesisUtterance | null,
+    isSpeakingWindow: false as boolean,
   }),
 
   getters: {
@@ -40,7 +40,10 @@ export const useSpeechStore = defineStore('speechStore', {
       }
     },
     speak(inTxt: string, inSpeakerIdx: number, inSpeakerVoiceName: string) {
-      console.log('speak', inTxt, inSpeakerIdx, inSpeakerVoiceName);
+      if (!this.isSpeakingWindow) {
+        console.warn('Speech synthesis is enabled in this window.');
+        return;
+      }
       if (this.voices.length === 0) {
         console.warn('Voices not loaded yet, please wait.');
         this.loadVoices();
@@ -59,22 +62,21 @@ export const useSpeechStore = defineStore('speechStore', {
 
       if (inSpeakerVoice) {
         this.isSpeakingActivityInProgress = true;
-        this.utterance = new SpeechSynthesisUtterance(inTxt);
-        this.utterance.voice = inSpeakerVoice;
-        this.utterance.onstart = () => {
+        const utterance = new SpeechSynthesisUtterance(inTxt);
+        utterance.voice = inSpeakerVoice;
+        utterance.onstart = () => {
           const mainRoomStore = useMainRoomStore();
           mainRoomStore.setTalkingState();
           console.log('Speech started');
         };
-        this.utterance.onend = () => {
-          console.log('Speech ended');
+        utterance.onend = () => {
           const mainRoomStore = useMainRoomStore();
           this.textToSpeak = '';
           this.isSpeakingActivityInProgress = false;
           this.speakerIdx = -1;
           mainRoomStore.clearTextToSpeak();
         };
-        this.utterance.onerror = (event) => {
+        utterance.onerror = (event) => {
           const mainRoomStore = useMainRoomStore();
           console.error('Speech synthesis error:', event.error);
           this.isSpeakingActivityInProgress = false;
@@ -82,7 +84,7 @@ export const useSpeechStore = defineStore('speechStore', {
           this.speakerIdx = -1;
           mainRoomStore.clearTextToSpeak();
         };
-        window.speechSynthesis.speak(this.utterance);
+        window.speechSynthesis.speak(utterance);
       }
     },
     forceStopSpeaking() {

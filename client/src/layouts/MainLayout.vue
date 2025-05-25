@@ -6,6 +6,7 @@
         <q-space />
         <connectivity-indicator />
       </q-toolbar>
+      <UpdateRibbon ref="updateRibbon" />
     </q-header>
 
     <q-page-container>
@@ -16,6 +17,7 @@
 
 <script setup lang="ts">
 import ConnectivityIndicator from 'src/components/Generic/ConnectivityIndicator.vue';
+import UpdateRibbon from 'components/Generic/UpdateRibbon.vue';
 
 import { onMounted } from 'vue';
 import { useSocketStore } from 'src/stores/socket-store';

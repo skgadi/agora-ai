@@ -2,6 +2,10 @@
   <password-check>
     <template v-if="isEditing">
       <q-page class="q-pa-md">
+        <div class="q-pa-md">
+          <full-event-file v-model="fullEventData" />
+        </div>
+
         <q-list bordered separator class="rounded-borders">
           <q-expansion-item
             expand-separator
@@ -74,6 +78,7 @@ import ParticipantsEditor from 'src/components/Admin/ParticipantsEditor.vue';
 import EventEditor from 'src/components/Admin/EventEditor.vue';
 import RolesEditor from 'src/components/Admin/RolesEditor.vue';
 import SendInputsToServer from 'src/components/Admin/SendInputsToServer.vue';
+import FullEventFile from 'src/components/Admin/FullEventFile.vue';
 
 import type { GSK_FULL_EVENT_DATA } from 'src/services/library/types/participants';
 import { ref, watch } from 'vue';

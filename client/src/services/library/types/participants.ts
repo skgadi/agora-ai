@@ -19,17 +19,11 @@ export interface GSK_EVENT {
   description: string;
   dynamics: string;
   background: string;
-  language: 'en-US' | 'es-MX';
+  language: string;
 }
 
 export interface GSK_FULL_EVENT_DATA {
   event: GSK_EVENT;
   participants: GSK_PARTICIPANT[];
   roles: GSK_ROLE[];
-}
-
-export interface GSK_TYPES {
-  name: string;
-  voice: 'male' | 'female';
-  accent: 'en-US' | 'es-MX';
 }

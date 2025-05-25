@@ -1,9 +1,9 @@
 <template>
-  <div class="image-container">
+  <div class="image-container transparent-image">
+    <q-img class="responsive-image transparent-image" :src="getAvatar" />
     <div class="text-h6 text-visible text-center">
-      {{ bot.name }} {{ speechStore.isSpeakingWindow }} ({{ myState }})
+      {{ bot.name }}
     </div>
-    <q-img class="responsive-image" :src="getAvatar" />
   </div>
 </template>
 <script setup lang="ts">
@@ -21,11 +21,9 @@ const props = defineProps({
 import type { GSK_PARTICIPANT } from 'src/services/library/types/participants';
 import defaultAvatar from 'assets/defualt-avatar.png'; // Correct path using @ alias
 import { useMainRoomStore } from 'src/stores/main-room-store';
-import { useSpeechStore } from 'src/stores/speech-store';
 import { computed } from 'vue';
 
 const mainRoomStore = useMainRoomStore();
-const speechStore = useSpeechStore();
 
 const myState = computed(() => {
   if (mainRoomStore.speakerIdx === props.myIndex) {
@@ -68,5 +66,22 @@ const getAvatar = computed(() => {
     /* dark shadow for light backgrounds */ -2px -2px 4px rgba(0, 0, 0, 0.8),
     /* top-left dark shadow */ 2px -2px 4px rgba(0, 0, 0, 0.8),
     /* top-right dark shadow */ -2px 2px 4px rgba(0, 0, 0, 0.8); /* bottom-left dark shadow */
+}
+
+.transparent-image {
+  display: inline-block;
+  background-color: transparent; /* Ensure container is transparent */
+  image-rendering: auto; /* Keep anti-aliasing smooth */
+}
+
+.transparent-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background-color: transparent; /* In case image doesn't fill the space */
+  mix-blend-mode: normal; /* Prevent strange blending on colored backgrounds */
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0); /* Fixes edge aliasing in some browsers */
 }
 </style>

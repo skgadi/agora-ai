@@ -82,7 +82,6 @@
             <template v-if="editable">
               <div class="row items-center justify-evenly">
                 <select-image
-                  v-if="participant.type !== 'human'"
                   v-model="participant.avatarIdle"
                   :is-disabled="!editable"
                   size="50px"

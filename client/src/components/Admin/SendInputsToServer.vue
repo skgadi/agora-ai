@@ -4,7 +4,7 @@
       <div class="q-pa-md">
         <div class="column items-center">
           <q-avatar size="100px">
-            <img src="https://cdn.quasar.dev/img/avatar.png" />
+            <img :src="participant.avatarIdle || defaultAvatar" />
           </q-avatar>
           <div class="text-h6 q-mt-sm">
             {{ participant.name || 'Unnamed Participant' }}
@@ -66,6 +66,7 @@ import type {
   GSK_VOICE_INPUT_TO_SERVER,
 } from 'src/services/library/types/data-transfer-protocls';
 import { useSocketStore } from 'src/stores/socket-store';
+import defaultAvatar from 'assets/defualt-avatar.png'; // Correct path using @ alias
 
 const $q = useQuasar();
 const socketStore = useSocketStore();

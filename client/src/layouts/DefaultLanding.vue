@@ -2,6 +2,7 @@
   <template v-if="userInteractionButtonPressed">
     <q-layout view="lHh Lpr lFf">
       <q-page-container>
+        <UpdateRibbon ref="updateRibbon" />
         <div style="position: fixed; top: 32px; right: 32px; z-index: 1000">
           <connectivity-indicator />
         </div>
@@ -23,6 +24,7 @@
 </template>
 <script setup lang="ts">
 import ConnectivityIndicator from 'src/components/Generic/ConnectivityIndicator.vue';
+import UpdateRibbon from 'components/Generic/UpdateRibbon.vue';
 
 import { onMounted } from 'vue';
 import { useSocketStore } from 'src/stores/socket-store';

@@ -12,7 +12,7 @@
     <tbody>
       <template v-for="(participant, idx) in participants" :key="idx">
         <tr>
-          <td>
+          <td style="width: 100px">
             <q-select
               v-model="participant.type"
               :options="optionsForType"
@@ -24,7 +24,7 @@
               map-options
             />
           </td>
-          <td>
+          <td style="width: 100px">
             <q-select
               v-model="participant.role"
               :options="roles"
@@ -36,7 +36,7 @@
               map-options
             />
           </td>
-          <td>
+          <td style="width: 200px">
             <q-input
               v-model="participant.name"
               type="text"
@@ -57,7 +57,7 @@
               >
             </q-input>
           </td>
-          <td>
+          <td style="width: 300px">
             <q-input
               v-model="participant.bio"
               type="textarea"
@@ -80,18 +80,40 @@
           </td>
           <td class="text-center">
             <template v-if="editable">
-              <select-image v-model="participant.avatarIdle" :is-disabled="!editable" size="50px" />
-              <q-btn
-                icon="delete"
-                round
-                outline
-                color="negative"
-                @click="
-                  () => {
-                    participants.splice(idx, 1);
-                  }
-                "
-              />
+              <div class="row items-center justify-evenly">
+                <select-image
+                  v-if="participant.type !== 'human'"
+                  v-model="participant.avatarIdle"
+                  :is-disabled="!editable"
+                  size="50px"
+                  tooltip="Avatar showing AI when idle"
+                />
+                <select-image
+                  v-if="participant.type !== 'human'"
+                  v-model="participant.avatarThinking"
+                  :is-disabled="!editable"
+                  size="50px"
+                  tooltip="Avatar showing AI when thinking"
+                />
+                <select-image
+                  v-if="participant.type !== 'human'"
+                  v-model="participant.avatarTalking"
+                  :is-disabled="!editable"
+                  size="50px"
+                  tooltip="Avatar showing AI when talking"
+                />
+                <q-btn
+                  icon="delete"
+                  round
+                  outline
+                  color="negative"
+                  @click="
+                    () => {
+                      participants.splice(idx, 1);
+                    }
+                  "
+                />
+              </div>
             </template>
           </td>
         </tr>

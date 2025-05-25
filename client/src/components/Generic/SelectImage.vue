@@ -1,11 +1,26 @@
 <template>
   <q-img
-    :src="imageSrcInString || 'https://cdn.quasar.dev/img/avatar.png'"
+    :src="imageSrcInString || defaultAvatar"
     spinner-color="white"
     :style="`max-width: ${size}; max-height: ${size}`"
     :class="isDisabled ? '' : 'cursor-pointer'"
     @click="openFileSelector"
-  />
+  >
+    <q-tooltip
+      v-if="tooltip"
+      anchor="top middle"
+      self="bottom middle"
+      :delay="100"
+      :transition-show="'jump-down'"
+      :transition-hide="'jump-up'"
+      max-width="300px"
+      :style="`max-width: ${size}; max-height: ${size}`"
+      :class="isDisabled ? '' : 'cursor-pointer'"
+      :content="tooltip"
+    >
+      {{ tooltip }}
+    </q-tooltip>
+  </q-img>
 
   <input
     type="file"
@@ -29,9 +44,14 @@ defineProps({
     type: String,
     default: '250px',
   },
+  tooltip: {
+    type: String,
+    default: '',
+  },
 });
 
 import { ref } from 'vue';
+import defaultAvatar from 'assets/defualt-avatar.png'; // Correct path using @ alias
 
 // Function to handle file selection and convert image to base64
 const handleFileSelect = (event: Event) => {

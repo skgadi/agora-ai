@@ -1,5 +1,5 @@
 export interface GSK_PARTICIPANT {
-  type: "human" | keyof typeof gsk_types;
+  type: string;
   name: string;
   role: string;
   bio: string;
@@ -33,37 +33,3 @@ export interface GSK_TYPES {
   voice: "male" | "female";
   accent: "en-US" | "es-MX";
 }
-
-export const gsk_types = {
-  "us-male": {
-    name: "John Doe",
-    voice: "male",
-    accent: "en-US",
-  },
-  "us-female": {
-    name: "Jane Doe",
-    voice: "female",
-    accent: "en-US",
-  },
-  "mx-male": {
-    name: "Juan Pérez",
-    voice: "male",
-    accent: "es-MX",
-  },
-  "mx-female": {
-    name: "Juana Pérez",
-    voice: "female",
-    accent: "es-MX",
-  },
-};
-
-export const optionsForLanguage = [
-  {
-    label: "English (US)",
-    value: "en-US",
-  },
-  {
-    label: "Spanish (MX)",
-    value: "es-MX",
-  },
-];

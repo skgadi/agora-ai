@@ -2,7 +2,7 @@
   <q-markup-table>
     <thead>
       <tr>
-        <th>Type</th>
+        <th>Human/AI-Voice</th>
         <th>Role</th>
         <th>Name</th>
         <th>Bio</th>
@@ -143,28 +143,23 @@ const props = defineProps({
 import SelectImage from 'src/components/Generic/SelectImage.vue';
 
 import {
-  gsk_types,
   type GSK_PARTICIPANT,
   type GSK_FULL_EVENT_DATA,
 } from 'src/services/library/types/participants';
 import { computed } from 'vue';
+import { useSpeechStore } from 'src/stores/speech-store';
 
-const optionsForType = (() => {
-  const options = [
+const speechStore = useSpeechStore();
+
+const optionsForType = computed(() => {
+  return [
     {
       label: 'Human',
       value: 'human',
     },
+    ...speechStore.allVoicesOptions,
   ];
-  (Object.keys(gsk_types) as Array<keyof typeof gsk_types>).forEach((key) => {
-    const type = gsk_types[key];
-    options.push({
-      label: type.name,
-      value: key,
-    });
-  });
-  return options;
-})();
+});
 
 const roles = computed(() => {
   return props.fullEventData.roles.map((role) => ({

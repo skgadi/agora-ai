@@ -55,11 +55,12 @@ export const getResponseFromAI = async (participantIdx: number) => {
         systemInstruction,
       },
     });
+    const recevedResponse = response?.text;
     appendToFullTranscript({
       participantIdx,
-      content: response?.text || "No response",
+      content: recevedResponse || "No response",
     });
-    if (response?.text) {
+    if (recevedResponse) {
       emitAIResponse(participantIdx, response.text); // Emit the AI response to the main room
     }
   } catch (error) {

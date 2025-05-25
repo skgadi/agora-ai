@@ -10,13 +10,18 @@ const __dirname = dirname(__filename);
 
 import {
   GSK_REQUEST_AI_TO_START_TALKING,
+  GSK_REQUEST_AI_TO_STOP_TALKING,
   GSK_SETTINGS_TO_INIT_AI,
   GSK_VOICE_INPUT_TO_SERVER,
 } from "../services/library/types/data-transfer-protocls.js";
 
 import * as path from "path";
 import { addToResponseQueue } from "../ai/main.js";
-import { emitFullEventData } from "../socket-rooms/main-room.js";
+import {
+  emitAiIsThinking,
+  emitAiStopTalking,
+  emitFullEventData,
+} from "../socket-rooms/main-room.js";
 
 const adminActivitiesSocketRoutines = async (io: any, socket: any) => {
   socket.on(
@@ -84,6 +89,14 @@ const adminActivitiesSocketRoutines = async (io: any, socket: any) => {
     async (inData: GSK_REQUEST_AI_TO_START_TALKING) => {
       const { speakerIdx } = inData.payload;
       addToResponseQueue(speakerIdx);
+      emitAiIsThinking(speakerIdx);
+    }
+  );
+  socket.on(
+    "admin-activities-stop-ai-voice",
+    async (inData: GSK_REQUEST_AI_TO_STOP_TALKING) => {
+      const { speakerIdx } = inData.payload;
+      emitAiStopTalking(speakerIdx);
     }
   );
 };

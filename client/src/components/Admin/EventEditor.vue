@@ -83,6 +83,20 @@ defineProps({
 });
 
 import SelectImage from 'src/components/Generic/SelectImage.vue';
+import { getHumanReadableLangTagInSameLang } from 'src/services/library/generic/utils';
 
-import { optionsForLanguage, type GSK_EVENT } from 'src/services/library/types/participants';
+import { type GSK_EVENT } from 'src/services/library/types/participants';
+import { computed } from 'vue';
+import { useSpeechStore } from 'src/stores/speech-store';
+
+const speechStore = useSpeechStore();
+
+const optionsForLanguage = computed(() => {
+  return speechStore.listAllUniqueLanguages.map((lang) => {
+    return {
+      label: getHumanReadableLangTagInSameLang(lang),
+      value: lang,
+    };
+  });
+});
 </script>

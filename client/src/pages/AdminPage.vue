@@ -79,8 +79,10 @@ import type { GSK_FULL_EVENT_DATA } from 'src/services/library/types/participant
 import { ref, watch } from 'vue';
 import { useSocketStore } from 'src/stores/socket-store';
 import type { GSK_SETTINGS_TO_INIT_AI } from 'src/services/library/types/data-transfer-protocls';
+import { useSpeechStore } from 'src/stores/speech-store';
 
 const socketStore = useSocketStore();
+const speechStore = useSpeechStore();
 
 //const participants = ref<GSK_PARTICIPANT[]>([]);
 const fullEventData = ref<GSK_FULL_EVENT_DATA>({
@@ -94,7 +96,7 @@ const fullEventData = ref<GSK_FULL_EVENT_DATA>({
   },
   participants: [
     {
-      type: 'us-female',
+      type: '',
       avatarIdle: '',
       avatarListening: '',
       avatarThinking: '',
@@ -105,7 +107,7 @@ const fullEventData = ref<GSK_FULL_EVENT_DATA>({
       role: 'Moderator',
     },
     {
-      type: 'us-male',
+      type: '',
       avatarIdle: '',
       avatarListening: '',
       avatarThinking: '',
@@ -140,6 +142,27 @@ const fullEventData = ref<GSK_FULL_EVENT_DATA>({
     },
   ],
 });
+
+watch(
+  () => speechStore.allVoicesOptions,
+  () => {
+    if (speechStore.allVoicesOptions.length === 0) {
+      return;
+    }
+    let voiceIndex = 0;
+    fullEventData.value.participants.forEach((participant) => {
+      if (participant.type === 'human') {
+        return;
+      }
+      participant.type =
+        speechStore?.allVoicesOptions?.[voiceIndex]?.value ||
+        speechStore?.allVoicesOptions?.[0]?.value ||
+        '';
+      voiceIndex++;
+    });
+  },
+  { immediate: true },
+);
 
 const isEditing = ref(true);
 

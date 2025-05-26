@@ -1,5 +1,9 @@
 import { addAudioToHistory } from "../ai/audios.js";
-import { resetTheFullEventData } from "../ai/full-history.js";
+import {
+  getFullTranscript,
+  getHumanReadableReport,
+  resetTheFullEventData,
+} from "../ai/full-history.js";
 import { padLeft } from "../services/library/general/utils.js";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
@@ -9,8 +13,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 import {
+  GSK_AI_HISTORY_TO_CLIENT,
+  GSK_HUMAN_READABLE_REPORT,
   GSK_REQUEST_AI_TO_START_TALKING,
   GSK_REQUEST_AI_TO_STOP_TALKING,
+  GSK_SEND_API_TO_SERVER,
   GSK_SETTINGS_TO_INIT_AI,
   GSK_VOICE_INPUT_TO_SERVER,
 } from "../services/library/types/data-transfer-protocls.js";
@@ -22,6 +29,7 @@ import {
   emitAiStopTalking,
   emitFullEventData,
 } from "../socket-rooms/main-room.js";
+import { setMyGeminiAPIKey } from "../ai/initialization.js";
 
 const adminActivitiesSocketRoutines = async (io: any, socket: any) => {
   socket.on(
@@ -97,6 +105,26 @@ const adminActivitiesSocketRoutines = async (io: any, socket: any) => {
     async (inData: GSK_REQUEST_AI_TO_STOP_TALKING) => {
       const { speakerIdx } = inData.payload;
       emitAiStopTalking(speakerIdx);
+    }
+  );
+  socket.on("admin-activities-request-structured-transcript", () => {
+    const payload: GSK_AI_HISTORY_TO_CLIENT = {
+      type: "GSK_AI_HISTORY_TO_CLIENT",
+      history: getFullTranscript(),
+    };
+    socket.emit("admin-activities-structured-transcript", payload);
+  });
+  socket.on("admin-activities-request-human-readable-report", () => {
+    const payload: GSK_HUMAN_READABLE_REPORT = {
+      type: "GSK_HUMAN_READABLE_REPORT",
+      report: getHumanReadableReport(),
+    };
+    socket.emit("admin-activities-human-readable-report", payload);
+  });
+  socket.on(
+    "admin-activities-set-api-code",
+    (apiCode: GSK_SEND_API_TO_SERVER) => {
+      setMyGeminiAPIKey(apiCode.api);
     }
   );
 };

@@ -14,12 +14,15 @@
     "dev-pwa": "quasar dev --mode pwa",
     "build": "quasar build",
     "build-pwa": "quasar build --mode pwa",
-    "postinstall": "quasar prepare"
+    "postinstall": "quasar prepare",
+    "clean-build": "rm -rf ../docs && yarn build-pwa && cp -r dist/pwa ../docs"
   },
   "dependencies": {
     "@ffmpeg/ffmpeg": "^0.12.15",
     "@quasar/extras": "^1.16.4",
     "axios": "^1.2.1",
+    "github-markdown-css": "^5.8.1",
+    "marked": "^15.0.12",
     "pinia": "^3.0.1",
     "quasar": "^2.16.0",
     "register-service-worker": "^1.7.2",

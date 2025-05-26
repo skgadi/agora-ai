@@ -4,7 +4,6 @@ import { appendToFullTranscript } from "./full-history.js";
 import fs from "fs";
 
 import {
-  GSK_HISTORY_ELEMENT,
   GSK_HISTORY_INPUT_ELEMENT,
   GSK_IN_AUDIO_ELEMENT,
 } from "../services/library/types/ai-data-model";
@@ -14,6 +13,7 @@ import {
   createUserContent,
   createPartFromUri,
 } from "@google/genai";
+import { ai } from "./initialization.js";
 
 export const toAppendQueue: GSK_IN_AUDIO_ELEMENT[] = [];
 export let isProcessing = false;
@@ -43,9 +43,6 @@ export const prepareAudioHistory = async () => {
   }
 };
 
-const myGeminiAPIKey = process.env.MY_GEMINI_API_KEY || "default_api_key"; // Replace with your actual API key
-const ai = new GoogleGenAI({ apiKey: myGeminiAPIKey });
-
 const getTranscriptFromAudio = async (audioLocalUrl: string) => {
   if (!audioLocalUrl) {
     return "";
@@ -56,7 +53,7 @@ const getTranscriptFromAudio = async (audioLocalUrl: string) => {
     console.error(`File not found: ${filePath}`);
     return "";
   }
-  const audioFile = await ai.files.upload({
+  const audioFile = await ai().files.upload({
     file: audioLocalUrl,
     config: {
       mimeType: "audio/wav",
@@ -66,7 +63,7 @@ const getTranscriptFromAudio = async (audioLocalUrl: string) => {
   if (!audioFile.uri) {
     return "";
   }
-  const response = await ai.models.generateContent({
+  const response = await ai().models.generateContent({
     model: "gemini-2.0-flash-001",
     contents: createUserContent([
       createPartFromUri(audioFile.uri, audioFile?.mimeType || "audio/wav"),

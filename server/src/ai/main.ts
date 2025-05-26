@@ -1,6 +1,5 @@
-import { GoogleGenAI } from "@google/genai";
+import { ai } from "./initialization.js";
 
-import dotenv from "dotenv";
 import {
   appendToFullTranscript,
   getPromptForAI,
@@ -8,10 +7,6 @@ import {
 } from "./full-history.js";
 import { isAllTasksDone } from "./audios.js";
 import { emitAIResponse } from "../socket-rooms/main-room.js";
-dotenv.config();
-
-const myGeminiAPIKey = process.env.MY_GEMINI_API_KEY || "default_api_key"; // Replace with your actual API key
-const ai = new GoogleGenAI({ apiKey: myGeminiAPIKey });
 
 const queueToGetResponse: number[] = []; // Queue to hold participant indices for which we need to get responses
 let isProcessing = false; // Flag to indicate if we are currently processing a response
@@ -48,7 +43,7 @@ export const getResponseFromAI = async (participantIdx: number) => {
   try {
     const systemInstruction = getSystemPrompt(participantIdx);
     const prompt = getPromptForAI();
-    const response = await ai.models.generateContent({
+    const response = await ai().models.generateContent({
       model: "gemini-2.0-flash-001",
       contents: prompt,
       config: {

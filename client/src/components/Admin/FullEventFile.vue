@@ -1,6 +1,9 @@
 <template>
   <div class="row items-center justify-evenly">
     <div>
+      <set-api-code />
+    </div>
+    <div>
       <q-btn
         color="primary"
         outline
@@ -33,6 +36,12 @@
     <div>
       <receive-full-event-data-from-server v-model="fullEventData" />
     </div>
+    <div>
+      <full-transcript-download />
+    </div>
+    <div>
+      <full-event-human-readable />
+    </div>
   </div>
 </template>
 <script lang="ts" setup>
@@ -41,6 +50,9 @@ const fullEventData = defineModel<GSK_FULL_EVENT_DATA>({
 });
 
 import ReceiveFullEventDataFromServer from 'src/components/Admin/ReceiveFullEventDataFromServer.vue';
+import FullTranscriptDownload from 'src/components/Admin/FullTranscriptDownload.vue';
+import FullEventHumanReadable from 'src/components/Admin/FullEventHumanReadable.vue';
+import SetApiCode from 'src/components/Admin/SetApiCode.vue';
 
 import type {
   GSK_EVENT,

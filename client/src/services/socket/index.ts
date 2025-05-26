@@ -2,7 +2,7 @@ import { io, type Socket } from 'socket.io-client';
 import { useSocketStore } from 'src/stores/socket-store';
 import { notify } from 'src/services/notifications/index';
 
-import eventsForAppCommon from './events/app-common';
+import eventsForAdminActivities from './events/admin-activities';
 import eventsForMainRoom from './events/main-room';
 
 class SocketioService {
@@ -40,7 +40,7 @@ class SocketioService {
     this.socket.onAny((label, ...args) => {
       //console.log(label, args);
       useSocketStore().detectedReceivedActivity();
-      eventsForAppCommon(label, ...args);
+      eventsForAdminActivities(label, ...args);
       eventsForMainRoom(label, ...args);
     });
   }

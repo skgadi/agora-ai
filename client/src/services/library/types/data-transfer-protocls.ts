@@ -1,3 +1,4 @@
+import type { GSK_HISTORY_ELEMENT } from './ai-data-model';
 import type { GSK_FULL_EVENT_DATA } from './participants';
 
 export interface GSK_SETTINGS_TO_INIT_AI {
@@ -50,4 +51,19 @@ export interface GSK_AI_TEXT_TO_SPEAK_ELEMENT {
 export interface GSK_AI_FULL_EVENT_DATA_TO_CLIENT {
   type: 'GSK_AI_FULL_EVENT_DATA_TO_CLIENT';
   fullEventData: GSK_FULL_EVENT_DATA;
+}
+
+export interface GSK_AI_HISTORY_TO_CLIENT {
+  type: 'GSK_AI_HISTORY_TO_CLIENT';
+  history: GSK_HISTORY_ELEMENT[];
+}
+
+export interface GSK_HUMAN_READABLE_REPORT {
+  type: 'GSK_HUMAN_READABLE_REPORT';
+  report: string;
+}
+
+export interface GSK_SEND_API_TO_SERVER {
+  type: 'GSK_SEND_API_TO_SERVER';
+  api: string;
 }

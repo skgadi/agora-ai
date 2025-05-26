@@ -1,0 +1,1 @@
+import{b as t}from"./index-3fevySbJ.js";import{S as e}from"./socket-store-DK1Fng7X.js";import"./index-dVou86D-.js";const c=t(({app:o})=>{o.config.globalProperties.$socket=e.socket});export{c as default};

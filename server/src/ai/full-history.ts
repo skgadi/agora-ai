@@ -58,18 +58,18 @@ export const getPromptForAI = () => {
   - **Event Description**: ${event.event.description}
   - **Event Dynamics**: ${event.event.dynamics}
   - **Event Language**: ${event.event.language}
-  # Participants
-  ${event.participants
-    .map(
-      (participant) =>
-        `- **Name**: ${participant.name}\n  - **Role**: ${participant.role}\n  - **Bio**: ${participant.bio}`
-    )
-    .join("\n")}
   # Roles
   ${event.roles
     .map(
       (role) =>
         `- **Role Name**: ${role.name}\n  - **Description**: ${role.description}`
+    )
+    .join("\n")}
+  # Participants
+  ${event.participants
+    .map(
+      (participant) =>
+        `- **Name**: ${participant.name}\n  - **Role**: ${participant.role}\n  - **Bio**: ${participant.bio}`
     )
     .join("\n")}
   # Transcript
@@ -92,5 +92,42 @@ export const getSystemPrompt = (idx: number) => {
   You are expected to respond in the same context as the previous speakers.
   You are expected to respond in the same context as the event dynamics.
   Your response should be just the content of the message, without any additional information.
+  `;
+};
+
+/**
+ * This function generates a human-readable report of the event, participants, roles, and transcript.
+ * It should be in markdown format.
+ * It should be used to record the event in a human-readable format.
+ * It should be used to generate a report of the event.
+ */
+export const getHumanReadableReport = () => {
+  return `
+# Event Report: ${event.event.name}
+## Event Details
+- **Description**: ${event.event.description}
+- **Dynamics**: ${event.event.dynamics}
+- **Language**: ${event.event.language}
+## Roles
+${event.roles
+  .map(
+    (role) =>
+      `- **Role Name**: ${role.name}\n  - **Description**: ${role.description}`
+  )
+  .join("\n")}
+## Participants
+${event.participants
+  .map(
+    (participant) =>
+      `- **Name**: ${participant.name}\n  - **Role**: ${participant.role}\n  - **Bio**: ${participant.bio}`
+  )
+  .join("\n")}
+## Transcript
+${fullTranscript
+  .map(
+    (element) =>
+      `- **Name**: ${element.name}\n  - **Role**: ${element.role}\n  - **Content**: ${element.content}`
+  )
+  .join("\n")}
   `;
 };

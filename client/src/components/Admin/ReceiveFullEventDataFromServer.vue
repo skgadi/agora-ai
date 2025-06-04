@@ -5,7 +5,7 @@
     outline
     rounded
     no-caps
-    label="Receive from Server"
+    label="Load model from server"
     @click="importFromServer"
   />
 </template>

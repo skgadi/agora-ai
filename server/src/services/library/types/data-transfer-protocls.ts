@@ -67,3 +67,21 @@ export interface GSK_SEND_API_TO_SERVER {
   type: "GSK_SEND_API_TO_SERVER";
   api: string;
 }
+
+export interface GSK_SEND_NOTIFICATION_TO_CLIENT {
+  type: "GSK_SEND_NOTIFICATION_TO_CLIENT";
+  payload: {
+    title: string;
+    message: string;
+    type: "positive" | "negative" | "info" | "warning";
+    duration?: number; // Optional duration in milliseconds
+    icon?: string; // Optional icon class
+  };
+}
+
+export interface GSK_SEND_STRUCTURED_TRANSCRIPT {
+  type: "GSK_SEND_STRUCTURED_TRANSCRIPT";
+  payload: {
+    history: GSK_HISTORY_ELEMENT[];
+  };
+}

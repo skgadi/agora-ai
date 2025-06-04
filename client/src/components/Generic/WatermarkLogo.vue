@@ -10,7 +10,7 @@ import appLogo from 'src/assets/app-logo.png';
   bottom: 10px;
   right: 10px;
   width: 100px; /* adjust size as needed */
-  opacity: 0.1; /* makes it look like a watermark */
+  opacity: 0.075; /* makes it look like a watermark */
   z-index: 9999; /* ensures it's on top of everything */
   pointer-events: none; /* so it doesn’t interfere with clicking other elements */
 }

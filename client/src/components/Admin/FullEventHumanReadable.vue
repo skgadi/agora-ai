@@ -4,7 +4,7 @@
     outline
     rounded
     no-caps
-    label="See full event from server"
+    label="Full report"
     @click="requestHumanReadableReport"
   />
   <q-dialog v-model="mdDialog" full-width full-height>

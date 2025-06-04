@@ -43,17 +43,34 @@
           </q-expansion-item>
         </q-list>
 
-        <q-btn
-          :label="isEditing ? 'Send data to AI' : 'Edit data'"
-          :icon="isEditing ? 'send' : 'edit'"
-          rounded
-          outline
-          no-caps
-          color="primary"
-          class="q-mt-md full-width"
-          :disable="!socketStore.isConnected"
-          @click="startStopShow"
-        />
+        <div class="row">
+          <div class="col">
+            <q-btn
+              label="Start a new conversation"
+              icon="send"
+              rounded
+              outline
+              no-caps
+              color="primary"
+              class="q-mt-md full-width"
+              :disable="!socketStore.isConnected"
+              @click="startStopShow"
+            />
+          </div>
+          <div class="col">
+            <q-btn
+              label="Continue the conversation"
+              icon="send"
+              rounded
+              outline
+              no-caps
+              color="primary"
+              class="q-mt-md full-width"
+              :disable="!socketStore.isConnected"
+              @click="continueConversation"
+            />
+          </div>
+        </div>
       </q-page>
     </template>
     <template v-else>
@@ -196,6 +213,25 @@ const startStopShow = () => {
     fullEventData: fullEventData.value,
   };
   socketStore.emit('admin-activities-init-ai', dataToSend);
+};
+
+const continueConversation = () => {
+  // confirm before starting
+  const confirmContinue = confirm(
+    'Are you sure you want to continue the conversation with existing conversation history?',
+  );
+  if (!confirmContinue) {
+    return;
+  }
+
+  isEditing.value = false;
+
+  // Logic to send data to AI
+  const dataToSend: GSK_SETTINGS_TO_INIT_AI = {
+    type: 'GSK_SETTINGS_TO_INIT_AI',
+    fullEventData: fullEventData.value,
+  };
+  socketStore.emit('admin-activities-continue-ai-with-history', dataToSend);
 };
 
 watch(

@@ -5,7 +5,7 @@
     outline
     rounded
     no-caps
-    label="Setup Gemini"
+    label="Gemini"
     @click="setTheAPIToServer"
   />
 </template>

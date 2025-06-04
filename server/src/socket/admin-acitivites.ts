@@ -1,8 +1,10 @@
 import { addAudioToHistory } from "../ai/audios.js";
 import {
+  contiueEventWithHistory,
   getFullTranscript,
   getHumanReadableReport,
   resetTheFullEventData,
+  setFullTranscript,
 } from "../ai/full-history.js";
 import { padLeft } from "../services/library/general/utils.js";
 import { fileURLToPath } from "url";
@@ -18,6 +20,7 @@ import {
   GSK_REQUEST_AI_TO_START_TALKING,
   GSK_REQUEST_AI_TO_STOP_TALKING,
   GSK_SEND_API_TO_SERVER,
+  GSK_SEND_STRUCTURED_TRANSCRIPT,
   GSK_SETTINGS_TO_INIT_AI,
   GSK_VOICE_INPUT_TO_SERVER,
 } from "../services/library/types/data-transfer-protocls.js";
@@ -30,15 +33,52 @@ import {
   emitFullEventData,
 } from "../socket-rooms/main-room.js";
 import { setMyGeminiAPIKey } from "../ai/initialization.js";
+import { notifyError, notifyInfo } from "../services/notifications/index.js";
 
 const adminActivitiesSocketRoutines = async (io: any, socket: any) => {
   socket.on(
     "admin-activities-init-ai",
     async (payload: GSK_SETTINGS_TO_INIT_AI) => {
-      resetTheFullEventData(payload.fullEventData);
-      emitFullEventData(payload.fullEventData);
+      try {
+        resetTheFullEventData(payload.fullEventData);
+        emitFullEventData(payload.fullEventData);
+        notifyInfo(socket, "New Conference started.", "AI Initialization");
+      } catch (error) {
+        console.error("Error in admin-activities-init-ai:", error);
+        notifyError(
+          socket,
+          "Failed to initialize AI settings. Please check the server logs for more details.",
+          "Initialization Error"
+        );
+      }
     }
   );
+
+  socket.on(
+    "admin-activities-continue-ai-with-history",
+    async (payload: GSK_SETTINGS_TO_INIT_AI) => {
+      try {
+        contiueEventWithHistory(payload.fullEventData);
+        emitFullEventData(payload.fullEventData);
+        notifyInfo(
+          socket,
+          "AI settings updated with existing history.",
+          "AI History Update"
+        );
+      } catch (error) {
+        console.error(
+          "Error in admin-activities-continue-ai-with-history:",
+          error
+        );
+        notifyError(
+          socket,
+          "Failed to update AI settings with history. Please check the server logs for more details.",
+          "History Update Error"
+        );
+      }
+    }
+  );
+
   socket.on(
     "admin-activities-voice-input-to-server",
     async (payload: GSK_VOICE_INPUT_TO_SERVER) => {
@@ -125,6 +165,21 @@ const adminActivitiesSocketRoutines = async (io: any, socket: any) => {
     "admin-activities-set-api-code",
     (apiCode: GSK_SEND_API_TO_SERVER) => {
       setMyGeminiAPIKey(apiCode.api);
+    }
+  );
+  socket.on(
+    "admin-activities-replace-full-history",
+    (structuredTranscript: GSK_SEND_STRUCTURED_TRANSCRIPT) => {
+      try {
+        setFullTranscript(structuredTranscript.payload.history);
+      } catch (error) {
+        console.error("Error in admin-activities-replace-full-history:", error);
+        notifyError(
+          socket,
+          "Failed to replace full history. Please check the server logs for more details.",
+          "Replace History Error"
+        );
+      }
     }
   );
 };

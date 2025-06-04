@@ -5,7 +5,7 @@
     outline
     rounded
     no-caps
-    label="Download transcript"
+    label="Transcripts"
     @click="requestToDownloadStructuredTranscript"
   />
 </template>
@@ -15,6 +15,6 @@ import { useSocketStore } from 'src/stores/socket-store';
 const socketStore = useSocketStore();
 
 const requestToDownloadStructuredTranscript = () => {
-  socketStore.emit('admin-activities-request-human-readable-report');
+  socketStore.emit('admin-activities-request-structured-transcript');
 };
 </script>

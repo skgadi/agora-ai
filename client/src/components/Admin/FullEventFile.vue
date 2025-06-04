@@ -10,7 +10,7 @@
         rounded
         icon="save"
         no-caps
-        label="Download"
+        label="Model"
         @click="downloadJson"
         class="q-mr-md"
       />
@@ -22,7 +22,7 @@
         outline
         rounded
         no-caps
-        label="Upload"
+        label="Model"
         @click="triggerFileInput"
       />
       <input
@@ -40,6 +40,9 @@
       <full-transcript-download />
     </div>
     <div>
+      <upload-transcript-to-server />
+    </div>
+    <div>
       <full-event-human-readable />
     </div>
   </div>
@@ -52,6 +55,7 @@ const fullEventData = defineModel<GSK_FULL_EVENT_DATA>({
 import ReceiveFullEventDataFromServer from 'src/components/Admin/ReceiveFullEventDataFromServer.vue';
 import FullTranscriptDownload from 'src/components/Admin/FullTranscriptDownload.vue';
 import FullEventHumanReadable from 'src/components/Admin/FullEventHumanReadable.vue';
+import UploadTranscriptToServer from 'src/components/Admin/UploadTranscriptToServer.vue';
 import SetApiCode from 'src/components/Admin/SetApiCode.vue';
 
 import type {

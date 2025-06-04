@@ -23,6 +23,10 @@ export const resetTheFullEventData = (newEvent: GSK_FULL_EVENT_DATA) => {
   clearFullTranscript();
 };
 
+export const contiueEventWithHistory = (newEvent: GSK_FULL_EVENT_DATA) => {
+  setFullEventData(newEvent);
+};
+
 const setFullEventData = (newEvent: GSK_FULL_EVENT_DATA) => {
   event.event = newEvent.event;
   event.participants = newEvent.participants;
@@ -41,7 +45,7 @@ export const appendToFullTranscript = (
     content: newElement.content,
   };
   fullTranscript.push(fullElement);
-  console.log("Full Transcript:", fullTranscript);
+  //console.log("Full Transcript:", fullTranscript);
   console.log("Full Transcript Length:", fullTranscript.length);
 };
 export const getFullTranscript = () => {
@@ -49,6 +53,13 @@ export const getFullTranscript = () => {
 };
 const clearFullTranscript = () => {
   fullTranscript.length = 0;
+};
+
+export const setFullTranscript = (newTranscript: GSK_HISTORY_ELEMENT[]) => {
+  fullTranscript.length = 0; // Clear the existing transcript
+  fullTranscript.push(...newTranscript); // Add the new transcript elements
+  //console.log("Full Transcript Set:", fullTranscript);
+  console.log("Full Transcript Length Set:", fullTranscript.length);
 };
 
 export const getPromptForAI = () => {

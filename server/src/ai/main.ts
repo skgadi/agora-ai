@@ -6,7 +6,10 @@ import {
   getSystemPrompt,
 } from "./full-history.js";
 import { isAllTasksDone } from "./audios.js";
-import { emitAIResponse } from "../socket-rooms/main-room.js";
+import {
+  emitAIResponse,
+  sendErrorToMainRoom,
+} from "../socket-rooms/main-room.js";
 
 const queueToGetResponse: number[] = []; // Queue to hold participant indices for which we need to get responses
 let isProcessing = false; // Flag to indicate if we are currently processing a response
@@ -58,11 +61,15 @@ export const getResponseFromAI = async (participantIdx: number) => {
     if (recevedResponse) {
       emitAIResponse(participantIdx, response.text); // Emit the AI response to the main room
     }
-  } catch (error) {
+  } catch (error: any) {
     appendToFullTranscript({
       participantIdx,
-      content: "Unable to record the response",
+      content: "((Unable to record the response))",
     });
     console.error("Error generating response from AI:", error);
+    sendErrorToMainRoom(
+      `Error generating response from AI for participant ${participantIdx}`,
+      `Error: ${error?.message || "Unknown error"}`
+    );
   }
 };

@@ -6,6 +6,7 @@ import {
   GSK_REQUEST_AI_TO_STOP_TALKING,
 } from "../services/library/types/data-transfer-protocls.js";
 import { GSK_FULL_EVENT_DATA } from "../services/library/types/participants.js";
+import { notifyError } from "../services/notifications/index.js";
 
 let io: any;
 
@@ -55,4 +56,11 @@ export const emitAiStopTalking = (speakerIdx: number) => {
     },
   };
   io.to("main-room").emit("main-room-ai-stop-talking", payLoad);
+};
+
+export const sendErrorToMainRoom = (
+  errorTitle: string,
+  errorMessage: string
+) => {
+  notifyError(io, errorMessage, errorTitle);
 };

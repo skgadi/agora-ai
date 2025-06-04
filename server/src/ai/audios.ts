@@ -8,12 +8,9 @@ import {
   GSK_IN_AUDIO_ELEMENT,
 } from "../services/library/types/ai-data-model";
 
-import {
-  GoogleGenAI,
-  createUserContent,
-  createPartFromUri,
-} from "@google/genai";
+import { createUserContent, createPartFromUri } from "@google/genai";
 import { ai } from "./initialization.js";
+import { sendErrorToMainRoom } from "../socket-rooms/main-room.js";
 
 export const toAppendQueue: GSK_IN_AUDIO_ELEMENT[] = [];
 export let isProcessing = false;
@@ -30,12 +27,20 @@ export const prepareAudioHistory = async () => {
       isProcessing = true;
       const { localUrl } = elementToProcess;
       // Check if the localUrl is a valid URL
-      const transcript = await getTranscriptFromAudio(localUrl);
-      const speakerTranscript: GSK_HISTORY_INPUT_ELEMENT = {
-        participantIdx: elementToProcess.speakerIdx,
-        content: transcript,
-      };
-      appendToFullTranscript(speakerTranscript);
+      try {
+        const transcript = await getTranscriptFromAudio(localUrl);
+        const speakerTranscript: GSK_HISTORY_INPUT_ELEMENT = {
+          participantIdx: elementToProcess.speakerIdx,
+          content: transcript,
+        };
+        appendToFullTranscript(speakerTranscript);
+      } catch (error: any) {
+        console.error("Error processing audio:", error);
+        sendErrorToMainRoom(
+          `Error processing audio for speaker ${elementToProcess.speakerIdx}`,
+          `Error: ${error?.message || "Unknown error"}`
+        );
+      }
       isProcessing = false;
     }
     // Process the next element in the queue
@@ -53,24 +58,33 @@ const getTranscriptFromAudio = async (audioLocalUrl: string) => {
     console.error(`File not found: ${filePath}`);
     return "";
   }
-  const audioFile = await ai().files.upload({
-    file: audioLocalUrl,
-    config: {
-      mimeType: "audio/wav",
-    },
-  });
+  try {
+    const audioFile = await ai().files.upload({
+      file: audioLocalUrl,
+      config: {
+        mimeType: "audio/wav",
+      },
+    });
 
-  if (!audioFile.uri) {
-    return "";
+    if (!audioFile.uri) {
+      return "";
+    }
+    const response = await ai().models.generateContent({
+      model: "gemini-2.0-flash-001",
+      contents: createUserContent([
+        createPartFromUri(audioFile.uri, audioFile?.mimeType || "audio/wav"),
+        "You are the interpreter of the audio. Please transcribe the audio to text. Do not add any additional information. Just transcribe the audio.",
+      ]),
+    });
+    return response?.text || "";
+  } catch (error: any) {
+    console.error("Error generating content from audio:", error);
+    sendErrorToMainRoom(
+      `Error preparing transcript for speaker ${filePath}`,
+      `Error: ${error?.message || "Unknown error"}`
+    );
+    return "((Error in understanding the response))";
   }
-  const response = await ai().models.generateContent({
-    model: "gemini-2.0-flash-001",
-    contents: createUserContent([
-      createPartFromUri(audioFile.uri, audioFile?.mimeType || "audio/wav"),
-      "You are the interpreter of the audio. Please transcribe the audio to text. Do not add any additional information. Just transcribe the audio.",
-    ]),
-  });
-  return response?.text || "";
 };
 
 export const isAllTasksDone = () => {

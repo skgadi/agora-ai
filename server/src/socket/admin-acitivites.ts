@@ -164,7 +164,16 @@ const adminActivitiesSocketRoutines = async (io: any, socket: any) => {
   socket.on(
     "admin-activities-set-api-code",
     (apiCode: GSK_SEND_API_TO_SERVER) => {
-      setMyGeminiAPIKey(apiCode.api);
+      try {
+        setMyGeminiAPIKey(apiCode.api);
+      } catch (error) {
+        console.error("Error in admin-activities-set-api-code:", error);
+        notifyError(
+          socket,
+          "Failed to set API code. Please check the server logs for more details.",
+          "API Code Error"
+        );
+      }
     }
   );
   socket.on(

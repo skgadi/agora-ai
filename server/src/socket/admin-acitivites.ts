@@ -191,5 +191,12 @@ const adminActivitiesSocketRoutines = async (io: any, socket: any) => {
       }
     }
   );
+  socket.on("admin-activities-get-admin-password", () => {
+    const adminPassword = process.env.MY_PAI_ADMIN_PASSWORD || "5sH8pO19f$?~";
+    socket.emit("admin-activities-admin-password", {
+      type: "GSK_ADMIN_PASSWORD",
+      password: adminPassword,
+    });
+  });
 };
 export { adminActivitiesSocketRoutines };

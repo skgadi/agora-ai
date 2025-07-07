@@ -1,4 +1,4 @@
-import { GSK_SEND_NOTIFICATION_TO_CLIENT } from "../library/types/data-transfer-protocls";
+import { GSK_SEND_NOTIFICATION_TO_CLIENT } from "../library/types/data-transfer-protocls.js";
 
 export const notifyError = (notifyTo: any, message: string, title?: string) => {
   const payLoad: GSK_SEND_NOTIFICATION_TO_CLIENT = {

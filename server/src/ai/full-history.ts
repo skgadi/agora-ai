@@ -1,8 +1,8 @@
 import {
   GSK_HISTORY_ELEMENT,
   GSK_HISTORY_INPUT_ELEMENT,
-} from "../services/library/types/ai-data-model";
-import { GSK_FULL_EVENT_DATA } from "../services/library/types/participants";
+} from "../services/library/types/ai-data-model.js";
+import { GSK_FULL_EVENT_DATA } from "../services/library/types/participants.js";
 
 const event: GSK_FULL_EVENT_DATA = {
   event: {

@@ -4,12 +4,12 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const aiHandler = {
-  myGeminiAPIKey: process.env.MY_GEMINI_API_KEY || "default_api_key", // Replace with your actual API key
+  myGeminiAPIKey: process.env.MY_PAI_GEMINI_API_KEY || "default_api_key", // Replace with your actual API key
   ai: new GoogleGenAI({
-    apiKey: process.env.MY_GEMINI_API_KEY || "default_api_key", // Replace with your actual API key
+    apiKey: process.env.MY_PAI_GEMINI_API_KEY || "default_api_key", // Replace with your actual API key
   }),
 };
-let myGeminiAPIKey = process.env.MY_GEMINI_API_KEY || "default_api_key"; // Replace with your actual API key
+let myGeminiAPIKey = process.env.MY_PAI_GEMINI_API_KEY || "default_api_key"; // Replace with your actual API key
 
 export const setMyGeminiAPIKey = (apiKey: string) => {
   if (!apiKey || typeof apiKey !== "string") {

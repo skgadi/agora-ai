@@ -3,7 +3,7 @@
     <slot />
   </template>
   <template v-else>
-    <q-page class="row items-center justify-evenly">
+    <div class="row items-center justify-evenly" style="height: 100vh">
       <div style="min-width: 300px">
         <q-input
           v-model="password"
@@ -19,21 +19,22 @@
           </template>
         </q-input>
       </div>
-    </q-page>
+    </div>
   </template>
 </template>
 
 <script setup lang="ts">
-import { passwordForAdminPanel } from 'src/services/library/passwords';
 import { ref, watch } from 'vue';
+import { useSettingsStore } from 'src/stores/settings-store';
 
 const password = ref('');
+const settingsStore = useSettingsStore();
 const passwordCheck = ref(false);
 
 watch(
   password,
   (newPassword) => {
-    if (newPassword === passwordForAdminPanel) {
+    if (newPassword === settingsStore.password) {
       passwordCheck.value = true;
     } else {
       passwordCheck.value = false;

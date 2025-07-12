@@ -1,5 +1,5 @@
-import type { GSK_HISTORY_ELEMENT } from "./ai-data-model";
-import type { GSK_FULL_EVENT_DATA } from "./participants";
+import type { GSK_HISTORY_ELEMENT } from "./ai-data-model.js";
+import type { GSK_FULL_EVENT_DATA } from "./participants.js";
 
 export interface GSK_SETTINGS_TO_INIT_AI {
   type: "GSK_SETTINGS_TO_INIT_AI";
@@ -83,5 +83,12 @@ export interface GSK_SEND_STRUCTURED_TRANSCRIPT {
   type: "GSK_SEND_STRUCTURED_TRANSCRIPT";
   payload: {
     history: GSK_HISTORY_ELEMENT[];
+  };
+}
+
+export interface GSK_SEND_PASSWORD_TO_CLIENT {
+  type: "GSK_SEND_PASSWORD_TO_CLIENT";
+  payload: {
+    password: string;
   };
 }

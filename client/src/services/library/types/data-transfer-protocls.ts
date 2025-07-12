@@ -85,3 +85,10 @@ export interface GSK_SEND_STRUCTURED_TRANSCRIPT {
     history: GSK_HISTORY_ELEMENT[];
   };
 }
+
+export interface GSK_SEND_PASSWORD_TO_CLIENT {
+  type: 'GSK_SEND_PASSWORD_TO_CLIENT';
+  payload: {
+    password: string;
+  };
+}

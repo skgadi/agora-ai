@@ -1,8 +1,10 @@
 import type {
   GSK_AI_HISTORY_TO_CLIENT,
   GSK_HUMAN_READABLE_REPORT,
+  GSK_SEND_PASSWORD_TO_CLIENT,
 } from 'src/services/library/types/data-transfer-protocls';
 import { useMainRoomStore } from 'src/stores/main-room-store';
+import { useSettingsStore } from 'src/stores/settings-store';
 
 export const events = (label: string, ...args: unknown[]) => {
   switch (label) {
@@ -33,6 +35,12 @@ export const events = (label: string, ...args: unknown[]) => {
       const payloadIn: GSK_HUMAN_READABLE_REPORT = args[0] as GSK_HUMAN_READABLE_REPORT;
       const mainRoomStore = useMainRoomStore();
       mainRoomStore.setHumanReadableReport(payloadIn.report);
+      return;
+    }
+    case 'app-main-admin-password': {
+      const payloadIn: GSK_SEND_PASSWORD_TO_CLIENT = args[0] as GSK_SEND_PASSWORD_TO_CLIENT;
+      const settingsStore = useSettingsStore();
+      settingsStore.setPassword(payloadIn.payload.password);
       return;
     }
     default:

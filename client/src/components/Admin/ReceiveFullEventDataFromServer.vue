@@ -1,13 +1,10 @@
 <template>
-  <q-btn
-    icon="cloud_download"
-    color="negative"
-    outline
-    rounded
-    no-caps
-    label="Load model from server"
-    @click="importFromServer"
-  />
+  <q-item clickable v-ripple @click="importFromServer">
+    <q-item-section avatar>
+      <q-icon color="negative" name="cloud_download" />
+    </q-item-section>
+    <q-item-section>Load model from server</q-item-section>
+  </q-item>
 </template>
 <script lang="ts" setup>
 const fullEventData = defineModel<GSK_FULL_EVENT_DATA>({

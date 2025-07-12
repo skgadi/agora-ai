@@ -1,13 +1,10 @@
 <template>
-  <q-btn
-    icon="mdi-api"
-    color="accent"
-    outline
-    rounded
-    no-caps
-    label="Gemini"
-    @click="setTheAPIToServer"
-  />
+  <q-item clickable v-ripple @click="setTheAPIToServer">
+    <q-item-section avatar>
+      <q-icon color="primary" name="mdi-api" />
+    </q-item-section>
+    <q-item-section>Set gemini's API</q-item-section>
+  </q-item>
 </template>
 <script lang="ts" setup>
 import { useSocketStore } from 'src/stores/socket-store';

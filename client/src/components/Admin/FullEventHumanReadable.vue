@@ -1,12 +1,10 @@
 <template>
-  <q-btn
-    icon="description"
-    outline
-    rounded
-    no-caps
-    label="Full report"
-    @click="requestHumanReadableReport"
-  />
+  <q-item clickable v-ripple @click="requestHumanReadableReport">
+    <q-item-section avatar>
+      <q-icon color="primary" name="description" />
+    </q-item-section>
+    <q-item-section>Show report</q-item-section>
+  </q-item>
   <q-dialog v-model="mdDialog" full-width full-height>
     <q-card class="q-pa-md" style="max-height: 100%; max-width: 100%; overflow: hidden">
       <div style="overflow: auto; height: 100%">

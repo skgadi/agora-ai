@@ -1,101 +1,137 @@
 <template>
   <password-check>
-    <template v-if="isEditing">
-      <q-page class="q-pa-md">
-        <div class="q-pa-md">
-          <full-event-file v-model="fullEventData" />
-        </div>
+    <q-layout view="lHr lpR fFf">
+      <q-header elevated class="bg-primary text-white">
+        <q-toolbar>
+          <q-btn
+            dense
+            flat
+            round
+            icon="menu"
+            @click="leftDrawerOpen = !leftDrawerOpen"
+            class="q-mr-md"
+          />
+          <q-toolbar-title>Panelist-AI</q-toolbar-title>
+          <q-space />
+          <connectivity-indicator />
+          <q-btn
+            dense
+            flat
+            round
+            icon="menu"
+            @click="rightDrawerOpen = !rightDrawerOpen"
+            class="q-ml-md"
+          />
+        </q-toolbar>
+        <UpdateRibbon ref="updateRibbon" />
+      </q-header>
+      <q-drawer v-model="leftDrawerOpen" side="left" bordered>
+        <!-- drawer content -->
+        <leftside-menu v-model="fullEventData" />
+      </q-drawer>
 
-        <q-list bordered separator class="rounded-borders">
-          <q-expansion-item
-            expand-separator
-            icon="event"
-            label="Event editor"
-            :caption="`Name: ${fullEventData.event.name}`"
-          >
-            <div class="q-pa-md">
-              <event-editor v-model="fullEventData.event" :editable="isEditing" />
+      <q-drawer v-model="rightDrawerOpen" side="right" bordered>
+        <!-- drawer content -->
+      </q-drawer>
+
+      <q-page-container>
+        <template v-if="isEditing">
+          <q-page class="q-pa-md">
+            <q-list bordered separator class="rounded-borders">
+              <q-expansion-item
+                expand-separator
+                icon="event"
+                label="Event editor"
+                :caption="`Name: ${fullEventData.event.name}`"
+              >
+                <div class="q-pa-md">
+                  <event-editor v-model="fullEventData.event" :editable="isEditing" />
+                </div>
+              </q-expansion-item>
+              <q-expansion-item
+                expand-separator
+                icon="category"
+                label="Roles editor"
+                :caption="`Total: ${fullEventData.roles.length}`"
+              >
+                <div class="q-pa-md">
+                  <roles-editor v-model="fullEventData.roles" :editable="isEditing" />
+                </div>
+              </q-expansion-item>
+              <q-expansion-item
+                expand-separator
+                icon="groups"
+                label="Participants editor"
+                :caption="`Total: ${fullEventData.participants.length}; AI participants: ${fullEventData.participants.filter((p) => p.type !== 'human').length} `"
+              >
+                <div class="q-pa-md">
+                  <participants-editor
+                    v-model="fullEventData.participants"
+                    :editable="isEditing"
+                    :full-event-data="fullEventData"
+                  />
+                </div>
+              </q-expansion-item>
+            </q-list>
+
+            <div class="row">
+              <div class="col">
+                <q-btn
+                  label="Start a new conversation"
+                  icon="send"
+                  rounded
+                  outline
+                  no-caps
+                  color="primary"
+                  class="q-mt-md full-width"
+                  :disable="!socketStore.isConnected"
+                  @click="startStopShow"
+                />
+              </div>
+              <div class="col">
+                <q-btn
+                  label="Continue the conversation"
+                  icon="send"
+                  rounded
+                  outline
+                  no-caps
+                  color="primary"
+                  class="q-mt-md full-width"
+                  :disable="!socketStore.isConnected"
+                  @click="continueConversation"
+                />
+              </div>
             </div>
-          </q-expansion-item>
-          <q-expansion-item
-            expand-separator
-            icon="category"
-            label="Roles editor"
-            :caption="`Total: ${fullEventData.roles.length}`"
-          >
-            <div class="q-pa-md">
-              <roles-editor v-model="fullEventData.roles" :editable="isEditing" />
-            </div>
-          </q-expansion-item>
-          <q-expansion-item
-            expand-separator
-            icon="groups"
-            label="Participants editor"
-            :caption="`Total: ${fullEventData.participants.length}; AI participants: ${fullEventData.participants.filter((p) => p.type !== 'human').length} `"
-          >
-            <div class="q-pa-md">
-              <participants-editor
+          </q-page>
+        </template>
+        <template v-else>
+          <q-page class="row items-center justify-center">
+            <div class="full-width q-pa-md">
+              <send-inputs-to-server
                 v-model="fullEventData.participants"
                 :editable="isEditing"
                 :full-event-data="fullEventData"
               />
             </div>
-          </q-expansion-item>
-        </q-list>
-
-        <div class="row">
-          <div class="col">
-            <q-btn
-              label="Start a new conversation"
-              icon="send"
-              rounded
-              outline
-              no-caps
-              color="primary"
-              class="q-mt-md full-width"
-              :disable="!socketStore.isConnected"
-              @click="startStopShow"
-            />
-          </div>
-          <div class="col">
-            <q-btn
-              label="Continue the conversation"
-              icon="send"
-              rounded
-              outline
-              no-caps
-              color="primary"
-              class="q-mt-md full-width"
-              :disable="!socketStore.isConnected"
-              @click="continueConversation"
-            />
-          </div>
-        </div>
-      </q-page>
-    </template>
-    <template v-else>
-      <q-page class="row items-center justify-center">
-        <div class="full-width q-pa-md">
-          <send-inputs-to-server
-            v-model="fullEventData.participants"
-            :editable="isEditing"
-            :full-event-data="fullEventData"
-          />
-        </div>
-        <q-page-sticky position="bottom-right" :offset="[18, 18]">
-          <q-btn fab icon="close" color="negative" @click="startStopShow" />
-        </q-page-sticky>
-      </q-page>
-    </template>
+            <q-page-sticky position="bottom-right" :offset="[18, 18]">
+              <q-btn fab icon="close" color="negative" @click="startStopShow" />
+            </q-page-sticky>
+          </q-page>
+        </template>
+      </q-page-container>
+    </q-layout>
   </password-check>
 </template>
 <script setup lang="ts">
+import ConnectivityIndicator from 'src/components/Generic/ConnectivityIndicator.vue';
+import UpdateRibbon from 'components/Generic/UpdateRibbon.vue';
+import LeftsideMenu from 'src/components/Admin/LeftsideMenu.vue';
+
 import PasswordCheck from 'src/components/Admin/PasswordCheck.vue';
 import ParticipantsEditor from 'src/components/Admin/ParticipantsEditor.vue';
 import EventEditor from 'src/components/Admin/EventEditor.vue';
 import RolesEditor from 'src/components/Admin/RolesEditor.vue';
 import SendInputsToServer from 'src/components/Admin/SendInputsToServer.vue';
-import FullEventFile from 'src/components/Admin/FullEventFile.vue';
 
 import type { GSK_FULL_EVENT_DATA } from 'src/services/library/types/participants';
 import { ref, watch } from 'vue';
@@ -105,6 +141,9 @@ import { useSpeechStore } from 'src/stores/speech-store';
 
 const socketStore = useSocketStore();
 const speechStore = useSpeechStore();
+
+const leftDrawerOpen = ref(false);
+const rightDrawerOpen = ref(false);
 
 //const participants = ref<GSK_PARTICIPANT[]>([]);
 const fullEventData = ref<GSK_FULL_EVENT_DATA>({

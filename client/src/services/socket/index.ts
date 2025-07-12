@@ -25,8 +25,6 @@ class SocketioService {
 
     this.socket.on('connect', () => {
       useSocketStore().connected();
-      this.socket?.emit('full-app-init');
-
       useSocketStore().resubscribeAll();
 
       notify('Conexión exitosa', 'Socket', 'positive');

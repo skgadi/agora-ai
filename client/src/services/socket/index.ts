@@ -5,6 +5,8 @@ import { notify } from 'src/services/notifications/index';
 import eventsForAdminActivities from './events/admin-activities';
 import eventsForMainRoom from './events/main-room';
 import eventsForNotifications from './events/notifications';
+import eventsForSettings from './events/settings';
+import eventsForSocket from './events/socket';
 
 class SocketioService {
   socket: Socket | null;
@@ -42,6 +44,8 @@ class SocketioService {
       eventsForAdminActivities(label, ...args);
       eventsForMainRoom(label, ...args);
       eventsForNotifications(label, ...args);
+      eventsForSettings(label, ...args);
+      eventsForSocket(label, ...args);
     });
   }
 

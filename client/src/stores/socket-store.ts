@@ -7,6 +7,7 @@ export const useSocketStore = defineStore('socketStore', () => {
   const sentActivity = ref(false);
   const receivedActivity = ref(false);
   const timeOfBlink = 200; // TODO: change time based on the size of data
+  const isServerConnectedToInternet = ref(false); // Add state for server internet connection status
 
   function initializeSocket() {
     SocketioService.setupSocketConnection();
@@ -28,6 +29,9 @@ export const useSocketStore = defineStore('socketStore', () => {
   }
   function disconnected() {
     isConnected.value = false;
+  }
+  function setServerConnectedToInternet(status: boolean) {
+    isServerConnectedToInternet.value = status;
   }
   function emit(event: string, ...args: unknown[]) {
     detectedSentActivity();
@@ -54,5 +58,7 @@ export const useSocketStore = defineStore('socketStore', () => {
     emit,
     volatileEmit,
     resubscribeAll,
+    isServerConnectedToInternet,
+    setServerConnectedToInternet,
   };
 });

@@ -22,7 +22,7 @@ const mainAppSocketRoutines = async (io: any, socket: any) => {
           password: adminPassword,
         },
       };
-      socket.emit("app-main-admin-password", payload);
+      socket.emit("settings-admin-password", payload);
 
       // Perform any necessary initialization logic here
 

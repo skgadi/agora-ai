@@ -92,3 +92,10 @@ export interface GSK_SEND_PASSWORD_TO_CLIENT {
     password: string;
   };
 }
+
+export interface GSK_SEND_SERVER_INTERNET_CONNECTIVITY {
+  type: "GSK_SEND_SERVER_INTERNET_CONNECTIVITY";
+  payload: {
+    isConnected: boolean;
+  };
+}

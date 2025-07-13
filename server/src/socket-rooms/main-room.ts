@@ -1,9 +1,14 @@
 import { getFullEventData } from "../ai/full-history.js";
 import {
+  isConnectedToInternet,
+  isConnectedToInternetViaHttp,
+} from "../services/library/general/utils.js";
+import {
   GSK_AI_FULL_EVENT_DATA_TO_CLIENT,
   GSK_AI_TEXT_TO_SPEAK,
   GSK_REQUEST_AI_TO_START_TALKING,
   GSK_REQUEST_AI_TO_STOP_TALKING,
+  GSK_SEND_SERVER_INTERNET_CONNECTIVITY,
 } from "../services/library/types/data-transfer-protocls.js";
 import { GSK_FULL_EVENT_DATA } from "../services/library/types/participants.js";
 import { notifyError } from "../services/notifications/index.js";
@@ -17,6 +22,8 @@ export const initialize = (inIO: any) => {
 export const joinMainRoom = async (socket: any) => {
   await socket.join("main-room");
   emitFullEventData(getFullEventData());
+  emitInternetConnectivity(socket);
+  console.log("Socket joined main-room");
 };
 export const emitAIResponse = (speakerIdx: number, text: string) => {
   const payLoad: GSK_AI_TEXT_TO_SPEAK = {
@@ -63,4 +70,28 @@ export const sendErrorToMainRoom = (
   errorMessage: string
 ) => {
   notifyError(io, errorMessage, errorTitle);
+};
+
+let internetConnectivity = await isConnectedToInternetViaHttp();
+
+setInterval(async () => {
+  const isConnected = await isConnectedToInternetViaHttp();
+  if (isConnected !== internetConnectivity) {
+    internetConnectivity = isConnected;
+    emitInternetConnectivity(io);
+  }
+}, 10000);
+
+export const emitInternetConnectivity = (socket: any) => {
+  const payload: GSK_SEND_SERVER_INTERNET_CONNECTIVITY = {
+    type: "GSK_SEND_SERVER_INTERNET_CONNECTIVITY",
+    payload: {
+      isConnected: internetConnectivity,
+    },
+  };
+  if (socket) {
+    socket.emit("socket-internet-connectivity", payload);
+  } else {
+    io.to("main-room").emit("socket-internet-connectivity", payload);
+  }
 };

@@ -3,8 +3,11 @@
     <q-layout view="lHh Lpr lFf">
       <q-page-container>
         <UpdateRibbon ref="updateRibbon" />
-        <div style="position: fixed; top: 32px; right: 32px; z-index: 1000">
+        <div style="position: fixed; top: 32px; right: 96px; z-index: 1000">
           <connectivity-indicator />
+        </div>
+        <div style="position: fixed; top: 32px; right: 32px; z-index: 1000">
+          <server-internet-indicator />
         </div>
         <router-view />
       </q-page-container>
@@ -25,6 +28,7 @@
 </template>
 <script setup lang="ts">
 import ConnectivityIndicator from 'src/components/Generic/ConnectivityIndicator.vue';
+import ServerInternetIndicator from 'src/components/Generic/ServerInternetIndicator.vue';
 import UpdateRibbon from 'components/Generic/UpdateRibbon.vue';
 import WatermarkLogo from 'src/components/Generic/WatermarkLogo.vue';
 

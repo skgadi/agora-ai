@@ -7,13 +7,59 @@ import { GSK_FULL_EVENT_DATA } from "../services/library/types/participants.js";
 const event: GSK_FULL_EVENT_DATA = {
   event: {
     background: "",
-    name: "",
-    description: "",
+    name: "GSK AI Conference 2023",
+    description:
+      "Join us for an exciting conference on the latest advancements in AI technology at GSK. Our expert speakers will share insights and knowledge on various AI applications in the pharmaceutical industry.",
     dynamics: "",
     language: "en-US",
   },
-  participants: [],
-  roles: [],
+  participants: [
+    {
+      type: "human",
+      avatarIdle: "",
+      avatarListening: "",
+      avatarThinking: "",
+      avatarTalking: "",
+
+      name: "John Doe",
+      bio: "AI Expert with 10 years of experience in the pharmaceutical industry.",
+      role: "Moderator",
+    },
+    {
+      type: "human",
+      avatarIdle: "",
+      avatarListening: "",
+      avatarThinking: "",
+      avatarTalking: "",
+
+      name: "Jane Smith",
+      bio: "Data Scientist with a focus on AI applications in healthcare.",
+      role: "Panelist",
+    },
+    {
+      type: "human",
+      avatarIdle: "",
+      avatarListening: "",
+      avatarThinking: "",
+      avatarTalking: "",
+
+      name: "Alice Johnson",
+      bio: "Machine Learning Engineer with a passion for AI in drug discovery.",
+      role: "Panelist",
+    },
+  ],
+  roles: [
+    {
+      name: "Moderator",
+      description:
+        "Facilitates the discussion and ensures that all participants have a chance to speak.",
+    },
+    {
+      name: "Panelist",
+      description:
+        "Engages in discussions and shares expertise on AI applications in the pharmaceutical industry.",
+    },
+  ],
 };
 
 const fullTranscript: GSK_HISTORY_ELEMENT[] = [];

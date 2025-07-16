@@ -171,13 +171,15 @@ import RolesEditor from 'src/components/Admin/RolesEditor.vue';
 import SendInputsToServer from 'src/components/Admin/SendInputsToServer.vue';
 
 import type { GSK_FULL_EVENT_DATA } from 'src/services/library/types/participants';
-import { ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useSocketStore } from 'src/stores/socket-store';
 import type { GSK_SETTINGS_TO_INIT_AI } from 'src/services/library/types/data-transfer-protocls';
 import { useSpeechStore } from 'src/stores/speech-store';
+import { useMainRoomStore } from 'src/stores/main-room-store';
 
 const socketStore = useSocketStore();
 const speechStore = useSpeechStore();
+const mainRoomStore = useMainRoomStore();
 
 const leftDrawerOpen = ref(false);
 const rightDrawerOpen = ref(false);
@@ -186,59 +188,17 @@ const rightDrawerOpen = ref(false);
 const fullEventData = ref<GSK_FULL_EVENT_DATA>({
   event: {
     background: '',
-    name: 'GSK AI Conference 2023',
-    description:
-      'Join us for an exciting conference on the latest advancements in AI technology at GSK. Our expert speakers will share insights and knowledge on various AI applications in the pharmaceutical industry.',
+    name: '',
+    description: '',
     dynamics: '',
     language: 'en-US',
   },
-  participants: [
-    {
-      type: '',
-      avatarIdle: '',
-      avatarListening: '',
-      avatarThinking: '',
-      avatarTalking: '',
+  participants: [],
+  roles: [],
+});
 
-      name: 'John Doe',
-      bio: 'AI Expert with 10 years of experience in the pharmaceutical industry.',
-      role: 'Moderator',
-    },
-    {
-      type: '',
-      avatarIdle: '',
-      avatarListening: '',
-      avatarThinking: '',
-      avatarTalking: '',
-
-      name: 'Jane Smith',
-      bio: 'Data Scientist with a focus on AI applications in healthcare.',
-      role: 'Panelist',
-    },
-    {
-      type: 'human',
-      avatarIdle: '',
-      avatarListening: '',
-      avatarThinking: '',
-      avatarTalking: '',
-
-      name: 'Alice Johnson',
-      bio: 'Machine Learning Engineer with a passion for AI in drug discovery.',
-      role: 'Panelist',
-    },
-  ],
-  roles: [
-    {
-      name: 'Moderator',
-      description:
-        'Facilitates the discussion and ensures that all participants have a chance to speak.',
-    },
-    {
-      name: 'Panelist',
-      description:
-        'Engages in discussions and shares expertise on AI applications in the pharmaceutical industry.',
-    },
-  ],
+onMounted(() => {
+  copyDataFromMainRoomToFullEventData();
 });
 
 watch(
@@ -321,4 +281,19 @@ watch(
 );
 
 const showChatFullScreen = ref(false);
+
+// when mainroom is update, update fullEventData
+watch(
+  () => mainRoomStore.fullEventData,
+  () => {
+    copyDataFromMainRoomToFullEventData();
+  },
+);
+
+const copyDataFromMainRoomToFullEventData = () => {
+  if (!mainRoomStore.fullEventData) {
+    return;
+  }
+  fullEventData.value = mainRoomStore.fullEventData;
+};
 </script>

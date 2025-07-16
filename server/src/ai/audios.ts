@@ -6,7 +6,7 @@ import fs from "fs";
 import {
   GSK_HISTORY_INPUT_ELEMENT,
   GSK_IN_AUDIO_ELEMENT,
-} from "../services/library/types/ai-data-model";
+} from "../services/library/types/ai-data-model.js";
 
 import { createUserContent, createPartFromUri } from "@google/genai";
 import { ai } from "./initialization.js";

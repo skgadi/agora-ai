@@ -30,6 +30,10 @@ export const useChatsStore = defineStore('chats', {
       this.conversationHistory = messageHistory;
       this.lastSentMessage = '';
     },
+    resetChatHistoryAtServer() {
+      const socketStore = useSocketStore();
+      socketStore.emit('admin-activities-remove-full-chat-history');
+    },
   },
 });
 

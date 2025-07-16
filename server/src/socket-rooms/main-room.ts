@@ -25,6 +25,7 @@ export const joinMainRoom = async (socket: any) => {
   await socket.join("main-room");
   emitFullEventData(getFullEventData());
   emitInternetConnectivity(socket);
+  sendChatHistory(socket);
   console.log("Socket joined main-room");
 };
 export const emitAIResponse = (speakerIdx: number, text: string) => {

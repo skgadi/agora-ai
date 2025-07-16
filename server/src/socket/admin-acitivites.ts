@@ -32,9 +32,11 @@ import {
   emitAiIsThinking,
   emitAiStopTalking,
   emitFullEventData,
+  sendChatHistory,
 } from "../socket-rooms/main-room.js";
 import { setMyGeminiAPIKey } from "../ai/initialization.js";
 import { notifyError, notifyInfo } from "../services/notifications/index.js";
+import { resetChatHistory } from "../ai/chat.js";
 
 const adminActivitiesSocketRoutines = async (io: any, socket: any) => {
   socket.on(
@@ -210,5 +212,22 @@ const adminActivitiesSocketRoutines = async (io: any, socket: any) => {
       }
     }
   );
+
+  socket.on("admin-activities-remove-full-chat-history", () => {
+    try {
+      resetChatHistory(); // Reset the chat history
+      notifyInfo(socket, "Full chat history removed.", "Chat History");
+    } catch (error) {
+      console.error(
+        "Error in admin-activities-remove-full-chat-history:",
+        error
+      );
+      notifyError(
+        socket,
+        "Failed to remove full chat history. Please check the server logs for more details.",
+        "Chat History Error"
+      );
+    }
+  });
 };
 export { adminActivitiesSocketRoutines };

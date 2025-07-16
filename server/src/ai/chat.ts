@@ -44,3 +44,8 @@ export const prepareChatHistoryForAI = () => {
 export const getChatHistory = () => {
   return chatHistory;
 };
+
+export const resetChatHistory = () => {
+  chatHistory.length = 0; // Clear the existing chat history
+  sendChatHistory(null); // Notify clients that the chat history has been reset
+};

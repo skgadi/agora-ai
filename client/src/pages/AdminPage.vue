@@ -4,21 +4,22 @@
       <q-header elevated class="bg-primary text-white">
         <q-toolbar>
           <q-btn
-            dense
             flat
             round
-            icon="menu"
+            size="lg"
+            :icon="leftDrawerOpen ? 'mdi-menu-open' : 'mdi-menu'"
             @click="leftDrawerOpen = !leftDrawerOpen"
             class="q-mr-md"
           />
           <q-toolbar-title>Panelist-AI</q-toolbar-title>
           <q-space />
           <connectivity-indicator />
+          <server-internet-indicator class="q-ml-md" />
           <q-btn
-            dense
             flat
             round
-            icon="menu"
+            size="lg"
+            :icon="rightDrawerOpen ? 'mdi-forum-remove-outline' : 'mdi-forum-outline'"
             @click="rightDrawerOpen = !rightDrawerOpen"
             class="q-ml-md"
           />
@@ -27,11 +28,32 @@
       </q-header>
       <q-drawer v-model="leftDrawerOpen" side="left" bordered>
         <!-- drawer content -->
-        <leftside-menu v-model="fullEventData" />
+        <q-list>
+          <q-item clickable @click="leftDrawerOpen = false">
+            <q-item-section avatar>
+              <q-icon name="mdi-close" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Close menu</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+        <leftside-menu v-model="fullEventData" :is-editing="isEditing" />
       </q-drawer>
 
-      <q-drawer v-model="rightDrawerOpen" side="right" bordered>
+      <q-drawer v-model="rightDrawerOpen" side="right" :width="500" :breakpoint="500" bordered>
         <!-- drawer content -->
+        <q-list>
+          <q-item clickable @click="rightDrawerOpen = false">
+            <q-item-section avatar>
+              <q-icon name="mdi-close" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Close chat</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+        <chat-drawer />
       </q-drawer>
 
       <q-page-container>
@@ -75,10 +97,10 @@
             </q-list>
 
             <div class="row">
-              <div class="col">
+              <div class="col q-mr-xl">
                 <q-btn
                   label="Start a new conversation"
-                  icon="send"
+                  icon="mdi-new-box"
                   rounded
                   outline
                   no-caps
@@ -91,7 +113,7 @@
               <div class="col">
                 <q-btn
                   label="Continue the conversation"
-                  icon="send"
+                  icon="mdi-play-outline"
                   rounded
                   outline
                   no-caps
@@ -126,6 +148,8 @@
 import ConnectivityIndicator from 'src/components/Generic/ConnectivityIndicator.vue';
 import UpdateRibbon from 'components/Generic/UpdateRibbon.vue';
 import LeftsideMenu from 'src/components/Admin/LeftsideMenu.vue';
+import ServerInternetIndicator from 'src/components/Generic/ServerInternetIndicator.vue';
+import ChatDrawer from 'src/components/Admin/ChatDrawer.vue';
 
 import PasswordCheck from 'src/components/Admin/PasswordCheck.vue';
 import ParticipantsEditor from 'src/components/Admin/ParticipantsEditor.vue';

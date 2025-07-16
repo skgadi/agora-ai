@@ -21,12 +21,13 @@ import {
   GSK_REQUEST_AI_TO_STOP_TALKING,
   GSK_SEND_API_TO_SERVER,
   GSK_SEND_STRUCTURED_TRANSCRIPT,
+  GSK_SEND_USER_CHAT_TO_SERVER,
   GSK_SETTINGS_TO_INIT_AI,
   GSK_VOICE_INPUT_TO_SERVER,
 } from "../services/library/types/data-transfer-protocls.js";
 
 import * as path from "path";
-import { addToResponseQueue } from "../ai/main.js";
+import { addToResponseQueue, getChatReplyFromAI } from "../ai/main.js";
 import {
   emitAiIsThinking,
   emitAiStopTalking,
@@ -187,6 +188,24 @@ const adminActivitiesSocketRoutines = async (io: any, socket: any) => {
           socket,
           "Failed to replace full history. Please check the server logs for more details.",
           "Replace History Error"
+        );
+      }
+    }
+  );
+  socket.on(
+    "admin-activities-send-user-chat-message-to-server",
+    async (chatMessage: GSK_SEND_USER_CHAT_TO_SERVER) => {
+      try {
+        await getChatReplyFromAI(chatMessage.payload.chatMessage);
+      } catch (error) {
+        console.error(
+          "Error in admin-activities-send-user-chat-message-to-server:",
+          error
+        );
+        notifyError(
+          socket,
+          "Failed to send user chat message. Please check the server logs for more details.",
+          "Chat Message Error"
         );
       }
     }

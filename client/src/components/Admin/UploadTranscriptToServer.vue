@@ -8,6 +8,13 @@
   <input ref="fileInput" type="file" accept=".json" style="display: none" @change="uploadJson" />
 </template>
 <script lang="ts" setup>
+const props = defineProps({
+  isEditing: {
+    type: Boolean,
+    default: false,
+  },
+});
+
 import { ref } from 'vue';
 import { useQuasar } from 'quasar';
 import { useSocketStore } from 'src/stores/socket-store';
@@ -24,6 +31,13 @@ const $q = useQuasar();
 
 // Function to trigger the hidden file input
 const triggerFileInput = () => {
+  if (!props.isEditing) {
+    $q.notify({
+      type: 'warning',
+      message: 'You cannot upload a new transcript while the event is active.',
+    });
+    return;
+  }
   if (fileInput.value) {
     fileInput.value.click();
   }

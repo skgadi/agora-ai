@@ -19,3 +19,9 @@ export interface GSK_IN_AUDIO_ELEMENT {
   speakerIdx: number;
   localUrl: string;
 }
+
+export interface GSK_CHAT_MESSAGE {
+  who: 'user' | 'ai';
+  content: string;
+  timestamp: number;
+}

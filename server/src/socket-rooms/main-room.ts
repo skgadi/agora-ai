@@ -1,3 +1,4 @@
+import { getChatHistory } from "../ai/chat.js";
 import { getFullEventData } from "../ai/full-history.js";
 import {
   isConnectedToInternet,
@@ -8,6 +9,7 @@ import {
   GSK_AI_TEXT_TO_SPEAK,
   GSK_REQUEST_AI_TO_START_TALKING,
   GSK_REQUEST_AI_TO_STOP_TALKING,
+  GSK_SEND_FULL_CHAT_HISTORY_TO_CLIENT,
   GSK_SEND_SERVER_INTERNET_CONNECTIVITY,
 } from "../services/library/types/data-transfer-protocls.js";
 import { GSK_FULL_EVENT_DATA } from "../services/library/types/participants.js";
@@ -93,5 +95,19 @@ export const emitInternetConnectivity = (socket: any) => {
     socket.emit("socket-internet-connectivity", payload);
   } else {
     io.to("main-room").emit("socket-internet-connectivity", payload);
+  }
+};
+
+export const sendChatHistory = (socket: any) => {
+  const chatHistoryPackage: GSK_SEND_FULL_CHAT_HISTORY_TO_CLIENT = {
+    type: "GSK_SEND_FULL_CHAT_HISTORY_TO_CLIENT",
+    payload: {
+      chatHistory: getChatHistory(),
+    },
+  };
+  if (socket) {
+    socket.emit("main-room-chat-history", chatHistoryPackage);
+  } else {
+    io.to("main-room").emit("main-room-chat-history", chatHistoryPackage);
   }
 };

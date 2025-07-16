@@ -1,4 +1,4 @@
-import type { GSK_HISTORY_ELEMENT } from './ai-data-model';
+import type { GSK_CHAT_MESSAGE, GSK_HISTORY_ELEMENT } from './ai-data-model';
 import type { GSK_FULL_EVENT_DATA } from './participants';
 
 export interface GSK_SETTINGS_TO_INIT_AI {
@@ -97,5 +97,19 @@ export interface GSK_SEND_SERVER_INTERNET_CONNECTIVITY {
   type: 'GSK_SEND_SERVER_INTERNET_CONNECTIVITY';
   payload: {
     isConnected: boolean;
+  };
+}
+
+export interface GSK_SEND_USER_CHAT_TO_SERVER {
+  type: 'GSK_SEND_USER_CHAT_TO_SERVER';
+  payload: {
+    chatMessage: string;
+  };
+}
+
+export interface GSK_SEND_FULL_CHAT_HISTORY_TO_CLIENT {
+  type: 'GSK_SEND_FULL_CHAT_HISTORY_TO_CLIENT';
+  payload: {
+    chatHistory: GSK_CHAT_MESSAGE[];
   };
 }

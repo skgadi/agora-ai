@@ -10,6 +10,10 @@ import {
   emitAIResponse,
   sendErrorToMainRoom,
 } from "../socket-rooms/main-room.js";
+import {
+  addHistoryUserAndAIChatMessage,
+  prepareChatHistoryForAI,
+} from "./chat.js";
 
 const queueToGetResponse: number[] = []; // Queue to hold participant indices for which we need to get responses
 let isProcessing = false; // Flag to indicate if we are currently processing a response
@@ -69,6 +73,40 @@ export const getResponseFromAI = async (participantIdx: number) => {
     console.error("Error generating response from AI:", error);
     sendErrorToMainRoom(
       `Error generating response from AI for participant ${participantIdx}`,
+      `Error: ${error?.message || "Unknown error"}`
+    );
+  }
+};
+
+export const getChatReplyFromAI = async (inMessage: string) => {
+  try {
+    const prompt = getPromptForAI();
+
+    // preparend prompt for history
+    const history = prepareChatHistoryForAI();
+    history.unshift({
+      role: "user",
+      parts: [{ text: prompt }],
+    });
+
+    const chat = await ai().chats.create({
+      model: "gemini-2.0-flash-001",
+      history: prepareChatHistoryForAI(),
+    });
+
+    const response = await chat.sendMessage({ message: inMessage });
+
+    if (response?.text) {
+      addHistoryUserAndAIChatMessage(inMessage, response.text);
+    }
+  } catch (error: any) {
+    addHistoryUserAndAIChatMessage(
+      inMessage,
+      "Unable to generate a response at this time."
+    );
+    console.error("Error generating response from AI:", error);
+    sendErrorToMainRoom(
+      "Error generating response from AI in chat",
       `Error: ${error?.message || "Unknown error"}`
     );
   }

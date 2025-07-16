@@ -15,7 +15,7 @@
     </q-item>
     <receive-full-event-data-from-server v-model="fullEventData" />
     <full-transcript-download />
-    <upload-transcript-to-server />
+    <upload-transcript-to-server :is-editing="isEditing" />
     <full-event-human-readable />
   </q-list>
   <input ref="fileInput" type="file" accept=".json" style="display: none" @change="uploadJson" />
@@ -24,6 +24,13 @@
 <script lang="ts" setup>
 const fullEventData = defineModel<GSK_FULL_EVENT_DATA>({
   required: true,
+});
+
+const props = defineProps({
+  isEditing: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 import ReceiveFullEventDataFromServer from 'src/components/Admin/ReceiveFullEventDataFromServer.vue';
@@ -61,6 +68,13 @@ const downloadJson = () => {
 
 // Function to trigger the hidden file input
 const triggerFileInput = () => {
+  if (!props.isEditing) {
+    $q.notify({
+      type: 'warning',
+      message: 'You cannot upload a new model while the event is active.',
+    });
+    return;
+  }
   if (fileInput.value) {
     fileInput.value.click();
   }

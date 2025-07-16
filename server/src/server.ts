@@ -19,6 +19,7 @@ initMainRoom(io);
 
 import { mainAppSocketRoutines } from "./socket/app-main.js";
 import { adminActivitiesSocketRoutines } from "./socket/admin-acitivites.js";
+import { clearTemporaryFiles } from "./clean-up-tmp.js";
 // Socket.IO connection handling
 io.on("connection", (socket) => {
   mainAppSocketRoutines(io, socket);
@@ -36,9 +37,13 @@ io.on("connection", (socket) => {
   });
 });
 
-const PORT = process.env.PORT || 3000; // Should be same as in client `services/socket/index.ts`
+const PORT = 3000; // Should be same as in client `services/socket/index.ts`
 
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 console.log("Server file is running");
+
+// Call the function immediately when the script starts
+console.log("Performing initial temporary file cleanup on server start...");
+clearTemporaryFiles();

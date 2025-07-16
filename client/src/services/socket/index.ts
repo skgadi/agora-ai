@@ -17,7 +17,7 @@ class SocketioService {
 
   setupSocketConnection(): void {
     //const isProduction = process.env.NODE_ENV === 'production';
-    const socketIOPort = 3100;
+    const socketIOPort = 3000;
     this.socket = io(`localhost:${socketIOPort}`, {
       transports: ['websocket'],
       autoConnect: true,

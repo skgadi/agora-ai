@@ -36,7 +36,7 @@ io.on("connection", (socket) => {
   });
 });
 
-const PORT = process.env.PORT || 3100; // Should be same as in client `services/socket/index.ts`
+const PORT = process.env.PORT || 3000; // Should be same as in client `services/socket/index.ts`
 
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

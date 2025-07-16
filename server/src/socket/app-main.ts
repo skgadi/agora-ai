@@ -15,7 +15,7 @@ const mainAppSocketRoutines = async (io: any, socket: any) => {
       );
 
       // sending password to client
-      const adminPassword = process.env.MY_PAI_ADMIN_PASSWORD || "5sH8pO19f$?~";
+      const adminPassword = process.env.MY_PAI_ADMIN_PASSWORD || "123456";
       const payload: GSK_SEND_PASSWORD_TO_CLIENT = {
         type: "GSK_SEND_PASSWORD_TO_CLIENT",
         payload: {

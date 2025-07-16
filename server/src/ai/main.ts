@@ -81,20 +81,27 @@ export const getResponseFromAI = async (participantIdx: number) => {
 export const getChatReplyFromAI = async (inMessage: string) => {
   try {
     const prompt = getPromptForAI();
-
     // preparend prompt for history
     const history = prepareChatHistoryForAI();
     history.unshift({
       role: "user",
-      parts: [{ text: prompt }],
+      parts: [
+        {
+          text: "You are closely observing the event described in the following text. This event has participants with specific roles and a detailed transcript of their interactions. Some of the participants are AI chatbots and others are humans. The human and AI participants are listed in 'Participants' section. Your task is to provide insightful responses based on the context provided.",
+        },
+        { text: prompt },
+      ],
     });
 
     const chat = await ai().chats.create({
       model: "gemini-2.0-flash-001",
-      history: prepareChatHistoryForAI(),
+      history,
     });
 
-    const response = await chat.sendMessage({ message: inMessage });
+    const response = await chat.sendMessage({
+      message: inMessage,
+      config: { temperature: 0 },
+    });
 
     if (response?.text) {
       addHistoryUserAndAIChatMessage(inMessage, response.text);

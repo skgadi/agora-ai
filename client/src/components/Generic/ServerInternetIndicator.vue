@@ -8,7 +8,7 @@ import { useSocketStore } from 'src/stores/socket-store';
 import { computed } from 'vue';
 const socketStore = useSocketStore();
 const icon = computed(() => {
-  if (socketStore.isServerConnectedToInternet) {
+  if (socketStore.isServerConnectedToInternet && socketStore.isConnected) {
     return 'mdi-web-check';
   } else {
     return 'mdi-web-cancel';

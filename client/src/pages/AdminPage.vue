@@ -52,6 +52,14 @@
               <q-item-label>Close chat</q-item-label>
             </q-item-section>
           </q-item>
+          <q-item clickable @click="(showChatFullScreen = true) && (rightDrawerOpen = false)">
+            <q-item-section avatar>
+              <q-icon name="mdi-forum-outline" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Open chat in full screen</q-item-label>
+            </q-item-section>
+          </q-item>
         </q-list>
         <chat-drawer />
       </q-drawer>
@@ -142,6 +150,11 @@
         </template>
       </q-page-container>
     </q-layout>
+    <q-dialog v-model="showChatFullScreen" full-height full-width>
+      <q-card style="width: 100%; max-width: 800px">
+        <chat-drawer />
+      </q-card>
+    </q-dialog>
   </password-check>
 </template>
 <script setup lang="ts">
@@ -149,7 +162,7 @@ import ConnectivityIndicator from 'src/components/Generic/ConnectivityIndicator.
 import UpdateRibbon from 'components/Generic/UpdateRibbon.vue';
 import LeftsideMenu from 'src/components/Admin/LeftsideMenu.vue';
 import ServerInternetIndicator from 'src/components/Generic/ServerInternetIndicator.vue';
-import ChatDrawer from 'src/components/Admin/ChatDrawer.vue';
+import ChatDrawer from 'src/components/Admin/ChatModule.vue';
 
 import PasswordCheck from 'src/components/Admin/PasswordCheck.vue';
 import ParticipantsEditor from 'src/components/Admin/ParticipantsEditor.vue';
@@ -306,4 +319,6 @@ watch(
   },
   { immediate: true },
 );
+
+const showChatFullScreen = ref(false);
 </script>

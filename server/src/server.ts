@@ -34,7 +34,7 @@ app.get("/api/config", (req, res) => {
   const protocol =
     req.protocol ||
     (req.headers["x-forwarded-proto"] === "https" ? "wss" : "ws");
-  const socketServerUrl = `${protocol}://${req.headers.host}`;
+  const socketServerUrl = `//${req.headers.host}`;
 
   // Log for debugging
   console.log(

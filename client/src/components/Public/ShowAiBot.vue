@@ -20,6 +20,8 @@ const props = defineProps({
 
 import type { GSK_PARTICIPANT } from 'src/services/library/types/participants';
 import defaultAvatar from 'assets/defualt-avatar.png'; // Correct path using @ alias
+import thinkingAvatar from 'assets/default-avatar-thinking.gif';
+import talkingAvatar from 'assets/default-avatar-talking.gif';
 import { useMainRoomStore } from 'src/stores/main-room-store';
 import { computed } from 'vue';
 
@@ -37,9 +39,9 @@ const getAvatar = computed(() => {
     case 'idle':
       return props.bot.avatarIdle || defaultAvatar;
     case 'talking':
-      return props.bot.avatarTalking || defaultAvatar;
+      return props.bot.avatarTalking || talkingAvatar;
     case 'thinking':
-      return props.bot.avatarThinking || defaultAvatar;
+      return props.bot.avatarThinking || thinkingAvatar;
     default:
       return defaultAvatar;
   }

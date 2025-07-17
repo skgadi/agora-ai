@@ -1,6 +1,6 @@
 <template>
   <q-img
-    :src="imageSrcInString || defaultAvatar"
+    :src="defaultImage"
     spinner-color="white"
     :style="`max-width: ${size}; max-height: ${size}`"
     :class="isDisabled ? '' : 'cursor-pointer'"
@@ -35,7 +35,7 @@ const imageSrcInString = defineModel<string>({
   required: true,
 });
 
-defineProps({
+const props = defineProps({
   isDisabled: {
     type: Boolean,
     default: false,
@@ -48,10 +48,17 @@ defineProps({
     type: String,
     default: '',
   },
+  usedFor: {
+    type: String as PropType<'idle' | 'thinking' | 'talking' | 'background'>,
+    default: 'background',
+  },
 });
 
-import { ref } from 'vue';
+import { computed, ref, type PropType } from 'vue';
 import defaultAvatar from 'assets/defualt-avatar.png'; // Correct path using @ alias
+import defaultTalkingAvatar from 'assets/default-avatar-talking.gif';
+import defaultThinkingAvatar from 'assets/default-avatar-thinking.gif';
+import backgroundImage from 'assets/default-background.jpg'; // Correct path using @ alias
 
 // Function to handle file selection and convert image to base64
 const handleFileSelect = (event: Event) => {
@@ -86,4 +93,22 @@ const openFileSelector = () => {
     fileInput.value.click();
   }
 };
+
+const defaultImage = computed(() => {
+  if (imageSrcInString.value) {
+    return imageSrcInString.value;
+  }
+  switch (props.usedFor) {
+    case 'idle':
+      return defaultAvatar;
+    case 'thinking':
+      return defaultThinkingAvatar;
+    case 'talking':
+      return defaultTalkingAvatar;
+    case 'background':
+      return backgroundImage;
+    default:
+      return defaultAvatar;
+  }
+});
 </script>

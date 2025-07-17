@@ -85,6 +85,7 @@
                   v-model="participant.avatarIdle"
                   :is-disabled="!editable"
                   size="50px"
+                  used-for="idle"
                   tooltip="Avatar showing AI when idle"
                 />
                 <select-image
@@ -92,6 +93,7 @@
                   v-model="participant.avatarThinking"
                   :is-disabled="!editable"
                   size="50px"
+                  used-for="thinking"
                   tooltip="Avatar showing AI when thinking"
                 />
                 <select-image
@@ -99,6 +101,7 @@
                   v-model="participant.avatarTalking"
                   :is-disabled="!editable"
                   size="50px"
+                  used-for="talking"
                   tooltip="Avatar showing AI when talking"
                 />
                 <q-btn

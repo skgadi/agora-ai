@@ -1,6 +1,6 @@
 <template>
   <div class="text-center q-mb-md">
-    <select-image v-model="event.background" :isDisabled="!editable" />
+    <select-image v-model="event.background" :isDisabled="!editable" size="500px" />
   </div>
   <q-select
     v-model="event.language"

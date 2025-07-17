@@ -18,8 +18,8 @@ window.speechSynthesis.onvoiceschanged = () => {
   speechStore.isSpeakingWindow = false;
 };
 
-onMounted(() => {
+onMounted(async () => {
   //console.log('DesktopLayout mounted');
-  socketStore.initializeSocket();
+  await socketStore.initializeSocket();
 });
 </script>

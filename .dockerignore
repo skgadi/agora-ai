@@ -1,0 +1,21 @@
+# General ignores
+.git
+.DS_Store
+*.log
+.vscode/
+
+# Docker specific
+Dockerfile
+.dockerignore
+
+# Local environment files
+.env*
+
+# Client specific ignores
+client/node_modules
+client/dist
+client/.quasar
+
+# Server specific ignores
+server/node_modules
+server/dist

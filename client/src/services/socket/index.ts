@@ -1,12 +1,14 @@
 import { io, type Socket } from 'socket.io-client';
 import { useSocketStore } from 'src/stores/socket-store';
 import { notify } from 'src/services/notifications/index';
+import { useSettingsStore } from 'src/stores/settings-store';
 
 import eventsForAdminActivities from './events/admin-activities';
 import eventsForMainRoom from './events/main-room';
 import eventsForNotifications from './events/notifications';
 import eventsForSettings from './events/settings';
 import eventsForSocket from './events/socket';
+import { getSocketConfig } from './get-socket-config';
 
 class SocketioService {
   socket: Socket | null;
@@ -15,10 +17,11 @@ class SocketioService {
     this.socket = null;
   }
 
-  setupSocketConnection(): void {
+  async setupSocketConnection() {
     //const isProduction = process.env.NODE_ENV === 'production';
-    const socketIOPort = 3000;
-    this.socket = io(`localhost:${socketIOPort}`, {
+    await getSocketConfig();
+    const settingsStore = useSettingsStore();
+    this.socket = io(settingsStore.socketServerUrl, {
       transports: ['websocket'],
       autoConnect: true,
       reconnection: true,

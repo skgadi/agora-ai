@@ -14,28 +14,42 @@ const io = new Server(server, {
   maxHttpBufferSize: 1e9, // 1 GB
 });
 
-// --- CORRECTED WAY TO GET __dirname EQUIVALENT IN ES MODULES ---
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-// --- END CORRECTED WAY ---
 
-// Serve static files from the 'public' directory
-// __dirname will now correctly resolve to the directory where server.ts is located
-// In your development environment, this is `/home/sigrama-admin/git/pai/server/src`
-// In your Docker build (after compilation and copying), this will be `/app/dist`
 app.use(express.static(path.join(__dirname, "..", "public")));
 
-// --- ADD THIS CRUCIAL SECTION ---
-// IMPORTANT: This is the crucial part for Quasar's history mode routing.
-// It serves your main index.html for any client-side routes (like /admin)
-// that are not explicit API routes or other server-defined routes.
-// This MUST be placed AFTER all other app.use() and app.get() for your API routes.
+app.get("/api/config", (req, res) => {
+  // Determine the Socket.IO server URL dynamically.
+  //
+  // Use `req.headers.host` to get the host and port the client is connecting to.
+  // This is the most reliable way when running behind proxies or in Docker,
+  // as it reflects the external URL.
+  //
+  // If `req.headers.host` is not available (e.g., direct access and not properly
+  // set by a proxy), you might fall back to a predefined environment variable
+  // or a default.
+  //
+  // Ensure you use 'https' if your production environment uses SSL.
+  const protocol =
+    req.protocol ||
+    (req.headers["x-forwarded-proto"] === "https" ? "wss" : "ws");
+  const socketServerUrl = `${protocol}://${req.headers.host}`;
 
-console.log("Serving static files from:", path.join(__dirname, "..", "public"));
+  // Log for debugging
+  console.log(
+    `Frontend is requesting config. Detected Socket.IO URL: ${socketServerUrl}`
+  );
+
+  res.json({
+    socketServerUrl: socketServerUrl,
+  });
+});
+
 app.get("/{*any}", (req, res) => {
+  // Changed '{*any}' to '/*' for broader compatibility
   res.sendFile(path.join(__dirname, "..", "public", "index.html"));
 });
-// --- END OF CRUCIAL SECTION ---
 
 import { initialize as initMainRoom } from "./socket-rooms/main-room.js";
 initMainRoom(io);

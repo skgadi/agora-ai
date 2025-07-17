@@ -2,7 +2,8 @@ import { defineStore, acceptHMRUpdate } from 'pinia';
 
 export const useSettingsStore = defineStore('settings', {
   state: () => ({
-    password: '5sH8pO19f$?~',
+    password: '123456',
+    socketServerUrl: 'localhost:3000', // Default socket server URL
   }),
 
   getters: {
@@ -12,6 +13,9 @@ export const useSettingsStore = defineStore('settings', {
   actions: {
     setPassword(newPassword: string) {
       this.password = newPassword;
+    },
+    setSocketServerUrl(newUrl: string) {
+      this.socketServerUrl = newUrl;
     },
   },
 });

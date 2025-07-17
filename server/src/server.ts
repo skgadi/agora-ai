@@ -14,28 +14,28 @@ const io = new Server(server, {
   maxHttpBufferSize: 1e9, // 1 GB
 });
 
-// --- Start of Changes for Static File Serving ---
-
-// Resolve __dirname equivalent for ES Modules
-// This will give you the directory of the current module file (server.js)
-// In your Docker setup, this will resolve to /app/dist
+// --- CORRECTED WAY TO GET __dirname EQUIVALENT IN ES MODULES ---
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+// --- END CORRECTED WAY ---
 
-// Correctly serve static files from the 'public' directory
-// Your server.js is in /app/dist
-// Your client-side assets are in /app/public
-// So, from /app/dist, you need to go up one level (to /app) and then into 'public'
+// Serve static files from the 'public' directory
+// __dirname will now correctly resolve to the directory where server.ts is located
+// In your development environment, this is `/home/sigrama-admin/git/pai/server/src`
+// In your Docker build (after compilation and copying), this will be `/app/dist`
 app.use(express.static(path.join(__dirname, "..", "public")));
 
+// --- ADD THIS CRUCIAL SECTION ---
 // IMPORTANT: This is the crucial part for Quasar's history mode routing.
 // It serves your main index.html for any client-side routes (like /admin)
-// that are not explicit API routes or static files.
-app.get("*", (req, res) => {
+// that are not explicit API routes or other server-defined routes.
+// This MUST be placed AFTER all other app.use() and app.get() for your API routes.
+
+console.log("Serving static files from:", path.join(__dirname, "..", "public"));
+app.get("/{*any}", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "public", "index.html"));
 });
-
-// --- End of Changes for Static File Serving ---
+// --- END OF CRUCIAL SECTION ---
 
 import { initialize as initMainRoom } from "./socket-rooms/main-room.js";
 initMainRoom(io);

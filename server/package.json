@@ -17,14 +17,14 @@
     "@types/express": "^5.0.2",
     "@types/node": "^22.16.0",
     "@types/socket.io": "^3.0.1",
-    "express": "^5.1.0",
     "nodemon": "^3.1.10",
-    "socket.io": "^4.8.1",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "socket.io": "^4.8.1",
+    "express": "^5.1.0",
     "@ai-sdk/xai": "^1.2.16",
     "@google/genai": "^1.0.0",
     "ai": "^4.3.16",

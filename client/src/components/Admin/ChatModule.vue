@@ -16,29 +16,35 @@
     <div class="row q-gutter-md">
       <div class="col">
         <q-btn
+          no-caps
           class="q-ma-md full-width"
           label="Send"
           color="primary"
           rounded
           @click="sendChatMessage"
+          icon="mdi-send-outline"
         />
       </div>
       <div class="col">
         <q-btn
+          no-caps
           class="q-ma-md full-width"
           label="Clear Input"
           color="secondary"
           rounded
           @click="message = ''"
+          icon="mdi-close-circle-outline"
         />
       </div>
       <div class="col">
         <q-btn
+          no-caps
           class="q-ma-md full-width"
           label="Reset Chat"
           color="negative"
           rounded
-          @click="chatsStore.resetChatHistoryAtServer()"
+          @click="clearChatAtServer"
+          icon="mdi-delete-outline"
         />
       </div>
     </div>
@@ -64,6 +70,12 @@ const sendChatMessage = () => {
 const clearWithConfirmation = () => {
   if (confirm('Are you sure you want to clear the chat?')) {
     message.value = '';
+  }
+};
+
+const clearChatAtServer = () => {
+  if (confirm('Are you sure you want to reset the chat history?')) {
+    chatsStore.resetChatHistoryAtServer();
   }
 };
 </script>

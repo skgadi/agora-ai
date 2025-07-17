@@ -25,3 +25,8 @@ export interface GSK_CHAT_MESSAGE {
   content: string;
   timestamp: number;
 }
+
+export interface GSK_AI_MODEL {
+  modelId: string;
+  modelName: string;
+}

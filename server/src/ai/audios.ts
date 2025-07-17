@@ -9,7 +9,7 @@ import {
 } from "../services/library/types/ai-data-model.js";
 
 import { createUserContent, createPartFromUri } from "@google/genai";
-import { ai } from "./initialization.js";
+import { ai, getSelectedModel } from "./initialization.js";
 import { sendErrorToMainRoom } from "../socket-rooms/main-room.js";
 
 export const toAppendQueue: GSK_IN_AUDIO_ELEMENT[] = [];
@@ -70,7 +70,7 @@ const getTranscriptFromAudio = async (audioLocalUrl: string) => {
       return "";
     }
     const response = await ai().models.generateContent({
-      model: "gemini-2.0-flash-001",
+      model: getSelectedModel().modelId,
       contents: createUserContent([
         createPartFromUri(audioFile.uri, audioFile?.mimeType || "audio/wav"),
         "You are the interpreter of the audio. Please transcribe the audio to text. Do not add any additional information. Just transcribe the audio.",

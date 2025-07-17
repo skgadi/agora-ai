@@ -38,6 +38,7 @@
             </q-item-section>
           </q-item>
         </q-list>
+        <select-ai-model />
         <leftside-menu v-model="fullEventData" :is-editing="isEditing" />
       </q-drawer>
 
@@ -163,6 +164,7 @@ import UpdateRibbon from 'components/Generic/UpdateRibbon.vue';
 import LeftsideMenu from 'src/components/Admin/LeftsideMenu.vue';
 import ServerInternetIndicator from 'src/components/Generic/ServerInternetIndicator.vue';
 import ChatDrawer from 'src/components/Admin/ChatModule.vue';
+import SelectAiModel from 'src/components/Admin/SelectAiModel.vue';
 
 import PasswordCheck from 'src/components/Admin/PasswordCheck.vue';
 import ParticipantsEditor from 'src/components/Admin/ParticipantsEditor.vue';

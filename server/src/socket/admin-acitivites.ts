@@ -20,6 +20,7 @@ import {
   GSK_REQUEST_AI_TO_START_TALKING,
   GSK_REQUEST_AI_TO_STOP_TALKING,
   GSK_SEND_API_TO_SERVER,
+  GSK_SEND_SELECTED_MODEL,
   GSK_SEND_STRUCTURED_TRANSCRIPT,
   GSK_SEND_USER_CHAT_TO_SERVER,
   GSK_SETTINGS_TO_INIT_AI,
@@ -34,7 +35,7 @@ import {
   emitFullEventData,
   sendChatHistory,
 } from "../socket-rooms/main-room.js";
-import { setMyGeminiAPIKey } from "../ai/initialization.js";
+import { setMyGeminiAPIKey, setSelectedModel } from "../ai/initialization.js";
 import { notifyError, notifyInfo } from "../services/notifications/index.js";
 import { resetChatHistory } from "../ai/chat.js";
 
@@ -229,5 +230,22 @@ const adminActivitiesSocketRoutines = async (io: any, socket: any) => {
       );
     }
   });
+
+  socket.on(
+    "admin-activities-set-ai-model",
+    (model: GSK_SEND_SELECTED_MODEL) => {
+      try {
+        setSelectedModel(model.payload.model);
+        notifyInfo(socket, "AI model updated successfully.", "AI Model Update");
+      } catch (error) {
+        console.error("Error in admin-activities-set-ai-model:", error);
+        notifyError(
+          socket,
+          "Failed to set AI model. Please check the server logs for more details.",
+          "AI Model Error"
+        );
+      }
+    }
+  );
 };
 export { adminActivitiesSocketRoutines };

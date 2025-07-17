@@ -1,4 +1,8 @@
-import type { GSK_CHAT_MESSAGE, GSK_HISTORY_ELEMENT } from "./ai-data-model.js";
+import type {
+  GSK_AI_MODEL,
+  GSK_CHAT_MESSAGE,
+  GSK_HISTORY_ELEMENT,
+} from "./ai-data-model.js";
 import type { GSK_FULL_EVENT_DATA } from "./participants.js";
 
 export interface GSK_SETTINGS_TO_INIT_AI {
@@ -111,5 +115,19 @@ export interface GSK_SEND_FULL_CHAT_HISTORY_TO_CLIENT {
   type: "GSK_SEND_FULL_CHAT_HISTORY_TO_CLIENT";
   payload: {
     chatHistory: GSK_CHAT_MESSAGE[];
+  };
+}
+
+export interface GSK_SEND_LIST_OF_USEFUL_MODELS_TO_CLIENT {
+  type: "GSK_SEND_LIST_OF_USEFUL_MODELS_TO_CLIENT";
+  payload: {
+    models: GSK_AI_MODEL[];
+  };
+}
+
+export interface GSK_SEND_SELECTED_MODEL {
+  type: "GSK_SEND_SELECTED_MODEL";
+  payload: {
+    model: GSK_AI_MODEL;
   };
 }

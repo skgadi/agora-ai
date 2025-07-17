@@ -1,4 +1,4 @@
-import { ai } from "./initialization.js";
+import { ai, getSelectedModel } from "./initialization.js";
 
 import {
   appendToFullTranscript,
@@ -51,7 +51,7 @@ export const getResponseFromAI = async (participantIdx: number) => {
     const systemInstruction = getSystemPrompt(participantIdx);
     const prompt = getPromptForAI();
     const response = await ai().models.generateContent({
-      model: "gemini-2.0-flash-001",
+      model: getSelectedModel().modelId,
       contents: prompt,
       config: {
         systemInstruction,
@@ -94,7 +94,7 @@ export const getChatReplyFromAI = async (inMessage: string) => {
     });
 
     const chat = await ai().chats.create({
-      model: "gemini-2.0-flash-001",
+      model: getSelectedModel().modelId,
       history,
     });
 

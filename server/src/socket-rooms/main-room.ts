@@ -1,6 +1,10 @@
 import { getChatHistory } from "../ai/chat.js";
 import { getFullEventData } from "../ai/full-history.js";
 import {
+  getListOfUsefulModels,
+  getSelectedModel,
+} from "../ai/initialization.js";
+import {
   isConnectedToInternet,
   isConnectedToInternetViaHttp,
 } from "../services/library/general/utils.js";
@@ -10,6 +14,8 @@ import {
   GSK_REQUEST_AI_TO_START_TALKING,
   GSK_REQUEST_AI_TO_STOP_TALKING,
   GSK_SEND_FULL_CHAT_HISTORY_TO_CLIENT,
+  GSK_SEND_LIST_OF_USEFUL_MODELS_TO_CLIENT,
+  GSK_SEND_SELECTED_MODEL,
   GSK_SEND_SERVER_INTERNET_CONNECTIVITY,
 } from "../services/library/types/data-transfer-protocls.js";
 import { GSK_FULL_EVENT_DATA } from "../services/library/types/participants.js";
@@ -26,6 +32,8 @@ export const joinMainRoom = async (socket: any) => {
   emitFullEventData(getFullEventData());
   emitInternetConnectivity(socket);
   sendChatHistory(socket);
+  sendModelsList(socket);
+  sendSelectedAIModel(socket);
   console.log("Socket joined main-room");
 };
 export const emitAIResponse = (speakerIdx: number, text: string) => {
@@ -110,5 +118,35 @@ export const sendChatHistory = (socket: any) => {
     socket.emit("main-room-chat-history", chatHistoryPackage);
   } else {
     io.to("main-room").emit("main-room-chat-history", chatHistoryPackage);
+  }
+};
+
+export const sendModelsList = (socket: any) => {
+  const modelsList = getListOfUsefulModels();
+  const payload: GSK_SEND_LIST_OF_USEFUL_MODELS_TO_CLIENT = {
+    type: "GSK_SEND_LIST_OF_USEFUL_MODELS_TO_CLIENT",
+    payload: {
+      models: modelsList,
+    },
+  };
+  if (socket) {
+    socket.emit("main-room-list-of-useful-models", payload);
+  } else {
+    io.to("main-room").emit("main-room-list-of-useful-models", payload);
+  }
+};
+
+export const sendSelectedAIModel = (socket: any) => {
+  const selectedModel = getSelectedModel();
+  const payload: GSK_SEND_SELECTED_MODEL = {
+    type: "GSK_SEND_SELECTED_MODEL",
+    payload: {
+      model: selectedModel,
+    },
+  };
+  if (socket) {
+    socket.emit("main-room-selected-ai-model", payload);
+  } else {
+    io.to("main-room").emit("main-room-selected-ai-model", payload);
   }
 };

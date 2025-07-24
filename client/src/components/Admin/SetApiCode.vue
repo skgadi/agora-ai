@@ -3,7 +3,7 @@
     <q-item-section avatar>
       <q-icon color="primary" name="mdi-api" />
     </q-item-section>
-    <q-item-section>Set gemini's API</q-item-section>
+    <q-item-section>Set Gemini's API key</q-item-section>
   </q-item>
 </template>
 <script lang="ts" setup>

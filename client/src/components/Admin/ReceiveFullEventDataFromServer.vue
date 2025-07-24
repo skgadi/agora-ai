@@ -3,7 +3,7 @@
     <q-item-section avatar>
       <q-icon color="negative" name="cloud_download" />
     </q-item-section>
-    <q-item-section>Load model from server</q-item-section>
+    <q-item-section>Receive event details from server</q-item-section>
   </q-item>
 </template>
 <script lang="ts" setup>

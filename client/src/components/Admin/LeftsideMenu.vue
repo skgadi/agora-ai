@@ -5,13 +5,13 @@
       <q-item-section avatar>
         <q-icon color="primary" name="save" />
       </q-item-section>
-      <q-item-section>Save model to disk</q-item-section>
+      <q-item-section>Save event details to disk</q-item-section>
     </q-item>
     <q-item clickable v-ripple @click="triggerFileInput">
       <q-item-section avatar>
         <q-icon color="secondary" name="upload_file" />
       </q-item-section>
-      <q-item-section>Upload model from disk</q-item-section>
+      <q-item-section>Select & Upload event details</q-item-section>
     </q-item>
     <receive-full-event-data-from-server v-model="fullEventData" />
     <full-transcript-download />

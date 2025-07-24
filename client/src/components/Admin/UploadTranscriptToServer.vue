@@ -3,7 +3,7 @@
     <q-item-section avatar>
       <q-icon color="secondary" name="upload_file" />
     </q-item-section>
-    <q-item-section>Upload transcripts</q-item-section>
+    <q-item-section>Select & Upload transcripts</q-item-section>
   </q-item>
   <input ref="fileInput" type="file" accept=".json" style="display: none" @change="uploadJson" />
 </template>

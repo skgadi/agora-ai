@@ -3,7 +3,7 @@
     <q-item-section avatar>
       <q-icon color="accent" name="download" />
     </q-item-section>
-    <q-item-section>Download structured transcript</q-item-section>
+    <q-item-section>Save transcripts to disk</q-item-section>
   </q-item>
 </template>
 <script lang="ts" setup>

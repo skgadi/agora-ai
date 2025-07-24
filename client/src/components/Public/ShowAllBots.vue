@@ -1,5 +1,5 @@
 <template>
-  <div class="row items-center justify-evenly">
+  <div class="full-width row no-wrap justify-evenly items-center content-center" style="gap: 16px">
     <template v-for="(bot, idx) in mainRoomStore.getAllParticipants" :key="idx">
       <template v-if="bot.type !== 'human'">
         <show-ai-bot :bot="bot" :my-index="idx" />

@@ -1,9 +1,9 @@
 <template>
   <q-item clickable v-ripple @click="importFromServer">
     <q-item-section avatar>
-      <q-icon color="negative" name="cloud_download" />
+      <q-icon color="negative" name="mdi-cloud-refresh-outline" />
     </q-item-section>
-    <q-item-section>Receive event details from server</q-item-section>
+    <q-item-section>Reset event data</q-item-section>
   </q-item>
 </template>
 <script lang="ts" setup>

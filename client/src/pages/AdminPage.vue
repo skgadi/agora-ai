@@ -11,7 +11,7 @@
             @click="leftDrawerOpen = !leftDrawerOpen"
             class="q-mr-md"
           />
-          <q-toolbar-title>Panelist-AI</q-toolbar-title>
+          <q-toolbar-title>AgoraAI</q-toolbar-title>
           <q-space />
           <connectivity-indicator />
           <server-internet-indicator class="q-ml-md" />
@@ -71,7 +71,7 @@
             <q-list bordered separator class="rounded-borders">
               <q-expansion-item
                 expand-separator
-                icon="event"
+                icon="mdi-calendar-outline"
                 label="Event editor"
                 :caption="`Name: ${fullEventData.event.name}`"
               >
@@ -81,7 +81,7 @@
               </q-expansion-item>
               <q-expansion-item
                 expand-separator
-                icon="category"
+                icon="mdi-shape-plus-outline"
                 label="Roles editor"
                 :caption="`Total: ${fullEventData.roles.length}`"
               >
@@ -91,7 +91,7 @@
               </q-expansion-item>
               <q-expansion-item
                 expand-separator
-                icon="groups"
+                icon="mdi-account-group-outline"
                 label="Participants editor"
                 :caption="`Total: ${fullEventData.participants.length}; AI participants: ${fullEventData.participants.filter((p) => p.type !== 'human').length} `"
               >

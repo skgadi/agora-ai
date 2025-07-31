@@ -3,15 +3,15 @@
     <set-api-code />
     <q-item clickable v-ripple @click="downloadJson">
       <q-item-section avatar>
-        <q-icon color="primary" name="save" />
+        <q-icon color="primary" name="mdi-content-save-outline" />
       </q-item-section>
       <q-item-section>Save event details to disk</q-item-section>
     </q-item>
     <q-item clickable v-ripple @click="triggerFileInput">
       <q-item-section avatar>
-        <q-icon color="secondary" name="upload_file" />
+        <q-icon color="secondary" name="mdi-upload-outline" />
       </q-item-section>
-      <q-item-section>Select & Upload event details</q-item-section>
+      <q-item-section>Select event details</q-item-section>
     </q-item>
     <receive-full-event-data-from-server v-model="fullEventData" />
     <full-transcript-download />

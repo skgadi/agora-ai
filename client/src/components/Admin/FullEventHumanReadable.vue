@@ -1,7 +1,7 @@
 <template>
   <q-item clickable v-ripple @click="requestHumanReadableReport">
     <q-item-section avatar>
-      <q-icon color="primary" name="description" />
+      <q-icon color="primary" name="mdi-file-document-outline" />
     </q-item-section>
     <q-item-section>Show report</q-item-section>
   </q-item>

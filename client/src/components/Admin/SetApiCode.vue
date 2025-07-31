@@ -1,7 +1,7 @@
 <template>
   <q-item clickable v-ripple @click="setTheAPIToServer">
     <q-item-section avatar>
-      <q-icon color="primary" name="mdi-api" />
+      <q-icon color="primary" name="mdi-key-outline" />
     </q-item-section>
     <q-item-section>Set Gemini's API key</q-item-section>
   </q-item>

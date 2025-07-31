@@ -14,15 +14,22 @@
     </q-layout>
   </template>
   <template v-else>
-    <q-btn
-      label="Press me"
-      icon="touch_app"
-      class="q-mt-md full-width"
-      rounded
-      outline
-      color="primary"
-      @click="userInteractionButtonPressed = true"
-    />
+    <div
+      class="q-pa-md row items-center justify-center"
+      style="height: 100vh; background-color: #000000"
+    >
+      <q-btn
+        label="Press me"
+        icon="touch_app"
+        class="q-mt-md press-me-button"
+        size="lg"
+        no-caps
+        rounded
+        outline
+        color="primary"
+        @click="userInteractionButtonPressed = true"
+      />
+    </div>
   </template>
   <watermark-logo />
 </template>
@@ -52,3 +59,25 @@ onMounted(async () => {
   await socketStore.initializeSocket();
 });
 </script>
+<style scoped lang="scss">
+/**
+A class that pulsates as if it is requesting user to press a button.
+*/
+.press-me-button {
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0.7);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0.7);
+  }
+}
+</style>

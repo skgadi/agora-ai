@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.0.1",
   "description": "This app allows users to record their voice and send it to the server. The server will then transcribe the audio and return the text to the client. The server also helps generate AI responses.",
-  "productName": "Panelist-AI",
+  "productName": "AgoraAI",
   "author": "Suresh Kumar Gadi <gadisureshkumar@gmail.com>",
   "type": "module",
   "private": true,

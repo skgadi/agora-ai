@@ -1,0 +1,61 @@
+{
+    "event": {
+      "background": "",
+      "name": "The Causal Web: Knowing 'Why' in an Age of Data",
+      "description": "This discussion tackles the age-old problem of distinguishing cause from correlation, a challenge amplified by big data. How can we be confident in our causal claims, from medicine to history?",
+      "dynamics": "A 'Socratic Dialogue' format. The moderator will pose a series of foundational questions to the panel, encouraging direct engagement and debate between them before opening the floor for audience participation.",
+      "language": "en-US"
+    },
+    "participants": [
+      {
+        "type": "human",
+        "avatarIdle": "",
+        "avatarListening": "",
+        "avatarThinking": "",
+        "avatarTalking": "",
+        "name": "Dr. Evelyn Reed",
+        "bio": "A philosopher from Princeton University specializing in epistemology. Her work examines the justification of belief and the logical structure of scientific theories.",
+        "role": "Moderator"
+      },
+      {
+        "type": "human",
+        "avatarIdle": "",
+        "avatarListening": "",
+        "avatarThinking": "",
+        "avatarTalking": "",
+        "name": "Dr. Ben Carter",
+        "bio": "A biostatistician from Johns Hopkins University. He designs randomized controlled trials (RCTs) and develops Bayesian methods for inferring causality from complex health data.",
+        "role": "Panelist"
+      },
+      {
+        "type": "human",
+        "avatarIdle": "",
+        "avatarListening": "",
+        "avatarThinking": "",
+        "avatarTalking": "",
+        "name": "Dr. Sofia Muñoz",
+        "bio": "An econometrician from UANL (Universidad Autónoma de Nuevo León). Her research in development economics uses quasi-experimental methods to assess the causal impact of public policies.",
+        "role": "Panelist"
+      },
+      {
+        "name": "Dr. David Okoro",
+        "bio": "Professor of History at Yale University. He specializes in 20th-century history and has written extensively on the challenges of constructing causal narratives and the role of contingency in historical events.",
+        "type": "human",
+        "role": "Panelist",
+        "avatarIdle": "",
+        "avatarTalking": "",
+        "avatarListening": "",
+        "avatarThinking": ""
+      }
+    ],
+    "roles": [
+      {
+        "name": "Moderator",
+        "description": "Guides the dialogue by posing provocative and foundational questions, ensuring the conversation remains focused and rigorous."
+      },
+      {
+        "name": "Panelist",
+        "description": "Engages in a dynamic debate with other experts, defending their discipline's approach to establishing causality."
+      }
+    ]
+  }

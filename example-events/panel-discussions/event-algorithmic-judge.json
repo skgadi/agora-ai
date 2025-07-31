@@ -1,0 +1,61 @@
+{
+    "event": {
+      "background": "",
+      "name": "The Algorithmic Judge: Navigating the Ethics of AI",
+      "description": "As algorithms and AI automate decisions in law, finance, and daily life, what new ethical frontiers must we navigate? This panel confronts the challenges of bias, accountability, and fairness.",
+      "dynamics": "A 'Town Hall' style debate. After brief initial statements from each panelist, the moderator will facilitate questions directly from the audience, fostering a community-wide conversation.",
+      "language": "en-US"
+    },
+    "participants": [
+      {
+        "type": "human",
+        "avatarIdle": "",
+        "avatarListening": "",
+        "avatarThinking": "",
+        "avatarTalking": "",
+        "name": "Dr. Laura Jenkins",
+        "bio": "A professor at Georgetown Law specializing in technology law and public policy. She has advised governmental bodies on regulating emerging technologies.",
+        "role": "Moderator"
+      },
+      {
+        "type": "human",
+        "avatarIdle": "",
+        "avatarListening": "",
+        "avatarThinking": "",
+        "avatarTalking": "",
+        "name": "Dr. Wei Zhang",
+        "bio": "A researcher in AI Ethics from Google AI. His work focuses on developing technical solutions for fairness, accountability, and transparency (FAT) in machine learning models.",
+        "role": "Panelist"
+      },
+      {
+        "type": "human",
+        "avatarIdle": "",
+        "avatarListening": "",
+        "avatarThinking": "",
+        "avatarTalking": "",
+        "name": "Dr. Tariq Hassan",
+        "bio": "A sociologist from the London School of Economics who studies the future of work. His research examines the societal impacts of automation on labor displacement and inequality.",
+        "role": "Panelist"
+      },
+      {
+        "name": "Dr. Olivia Bisset",
+        "bio": "A moral philosopher from the Sorbonne University. She writes on applied ethics, focusing on questions of machine consciousness, algorithmic responsibility, and deontological constraints on AI.",
+        "type": "human",
+        "role": "Panelist",
+        "avatarIdle": "",
+        "avatarTalking": "",
+        "avatarListening": "",
+        "avatarThinking": ""
+      }
+    ],
+    "roles": [
+      {
+        "name": "Moderator",
+        "description": "Manages the town hall format, ensures a respectful and productive dialogue, and selects questions from the audience."
+      },
+      {
+        "name": "Panelist",
+        "description": "Offers an expert opinion on the ethics of automation and responds to challenging questions from the community."
+      }
+    ]
+  }

@@ -1,0 +1,69 @@
+{
+  "event": {
+    "background": "",
+    "name": "Sweat, Balance, & Thrive: A Dialogue on Fitness",
+    "description": "This panel will explore the diverse approaches to health and fitness from different walks of life. The discussion will cover finding motivation, balancing physical well-being with a busy schedule, and the impact of fitness on mental health.",
+    "dynamics": "A 60-minute panel discussion. The moderator will guide the conversation with pre-determined questions for the first 30 minutes. The final 30 minutes will be an open forum, allowing the audience to ask questions and share their own experiences.",
+    "language": "en-US"
+  },
+  "participants": [
+    {
+      "type": "human",
+      "avatarIdle": "",
+      "avatarListening": "",
+      "avatarThinking": "",
+      "avatarTalking": "",
+      "name": "Maria Hernandez",
+      "bio": "A high school student and soccer player who grapples with balancing her training schedule with academics and a social life. She'll share her perspective on the pressure to perform and the role of fitness in her daily routine.",
+      "role": "The Student Athlete"
+    },
+    {
+      "type": "human",
+      "avatarIdle": "",
+      "avatarListening": "",
+      "avatarThinking": "",
+      "avatarTalking": "",
+      "name": "David Chen",
+      "bio": "A certified personal trainer and nutritionist who runs a local gym. He will provide expert advice on effective workout routines, healthy eating habits, and debunk common fitness myths.",
+      "role": "The Fitness Trainer"
+    },
+    {
+      "type": "human",
+      "avatarIdle": "",
+      "avatarListening": "",
+      "avatarThinking": "",
+      "avatarTalking": "",
+      "name": "Sarah Miller",
+      "bio": "A busy stay-at-home parent of three. She will discuss the challenges of prioritizing her health amidst childcare and household duties, and how she finds creative ways to stay active.",
+      "role": "The Parent"
+    },
+    {
+      "type": "human",
+      "avatarIdle": "",
+      "avatarListening": "",
+      "avatarThinking": "",
+      "avatarTalking": "",
+      "name": "Jonathan Vance",
+      "bio": "The CEO of a major tech company. He will share his philosophy on fitness as a tool for managing stress, boosting productivity, and maintaining mental clarity in a high-pressure environment.",
+      "role": "The CEO"
+    }
+  ],
+  "roles": [
+    {
+      "name": "The Student Athlete",
+      "description": "Represents the perspective of a young individual juggling fitness with academic and social pressures."
+    },
+    {
+      "name": "The Fitness Trainer",
+      "description": "An expert providing professional advice on exercise, nutrition, and common fitness misconceptions."
+    },
+    {
+      "name": "The Parent",
+      "description": "Represents the challenges and strategies for maintaining fitness amidst family and domestic responsibilities."
+    },
+    {
+      "name": "The CEO",
+      "description": "A high-achiever who views fitness as a crucial component for success and stress management in a demanding career."
+    }
+  ]
+}

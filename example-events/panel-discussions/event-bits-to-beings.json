@@ -1,0 +1,61 @@
+{
+    "event": {
+      "background": "",
+      "name": "From Bits to Beings: Deconstructing Information",
+      "description": "A deep dive into the fundamental concept of information as it appears in physics, biology, and human language. Is information physical? Can it be destroyed?",
+      "dynamics": "Each of the three panelists will give a 15-minute presentation on 'information' from their field's perspective. This will be followed by a 45-minute moderated debate and audience discussion.",
+      "language": "en-US"
+    },
+    "participants": [
+      {
+        "type": "human",
+        "avatarIdle": "",
+        "avatarListening": "",
+        "avatarThinking": "",
+        "avatarTalking": "",
+        "name": "Dr. Fatima Al-Jamil",
+        "bio": "Associate Professor of Computer Science at MIT. Her research in Human-Computer Interaction often grapples with the 'semantic gap'—the difference between machine data and human meaning.",
+        "role": "Moderator"
+      },
+      {
+        "type": "human",
+        "avatarIdle": "",
+        "avatarListening": "",
+        "avatarThinking": "",
+        "avatarTalking": "",
+        "name": "Dr. Leo Vance",
+        "bio": "A theoretical physicist from the Perimeter Institute, renowned for his work on the black hole information paradox and the connections between quantum mechanics and information theory.",
+        "role": "Panelist"
+      },
+      {
+        "type": "human",
+        "avatarIdle": "",
+        "avatarListening": "",
+        "avatarThinking": "",
+        "avatarTalking": "",
+        "name": "Dr. Isabella Rossi",
+        "bio": "Neuroscientist from the Max Planck Institute. Dr. Rossi's lab focuses on neural coding, investigating how patterns of neuron firing encode sensory information from the outside world.",
+        "role": "Panelist"
+      },
+      {
+        "name": "Dr. Samuel Chen",
+        "bio": "A historical linguist from the University of Oxford. His book, 'The Symbol's Legacy,' traces the evolution of writing systems as technologies for preserving information across millennia.",
+        "type": "human",
+        "role": "Panelist",
+        "avatarIdle": "",
+        "avatarTalking": "",
+        "avatarListening": "",
+        "avatarThinking": ""
+      }
+    ],
+    "roles": [
+      {
+        "name": "Moderator",
+        "description": "Introduces the speakers, manages presentation times, and guides the post-presentation debate."
+      },
+      {
+        "name": "Panelist",
+        "description": "Presents a focused talk on the topic and engages in debate with other experts."
+      }
+    ]
+  }

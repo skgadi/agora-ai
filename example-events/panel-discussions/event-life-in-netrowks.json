@@ -1,0 +1,61 @@
+{
+    "event": {
+      "background": "",
+      "name": "Connectomics: Life in the Network",
+      "description": "An exploration of the science of networks. Panelists will discuss how the architecture of connections—in brains, societies, and ecosystems—shapes function, stability, and dynamics.",
+      "dynamics": "An interactive session featuring live network visualizations. Panelists will comment on generated models of various networks, followed by a moderated discussion on underlying principles.",
+      "language": "en-US"
+    },
+    "participants": [
+      {
+        "type": "human",
+        "avatarIdle": "",
+        "avatarListening": "",
+        "avatarThinking": "",
+        "avatarTalking": "",
+        "name": "Dr. Maria Flores",
+        "bio": "A sociologist from the University of Toronto who specializes in social network analysis. Her work models how ideas and influence spread through communities.",
+        "role": "Moderator"
+      },
+      {
+        "type": "human",
+        "avatarIdle": "",
+        "avatarListening": "",
+        "avatarThinking": "",
+        "avatarTalking": "",
+        "name": "Dr. Ivan Popov",
+        "bio": "A computer scientist and graph theorist from ETH Zurich. He is a leading figure in network science, known for his work on scale-free networks and the algorithms that power modern logistics.",
+        "role": "Panelist"
+      },
+      {
+        "type": "human",
+        "avatarIdle": "",
+        "avatarListening": "",
+        "avatarThinking": "",
+        "avatarTalking": "",
+        "name": "Dr. Chloé Dubois",
+        "bio": "An epidemiologist from the Pasteur Institute in Paris. She models the spread of infectious diseases on contact networks to inform public health interventions and vaccination strategies.",
+        "role": "Panelist"
+      },
+      {
+        "name": "Dr. Aarav Singh",
+        "bio": "A leading neuroscientist in the field of connectomics from the Salk Institute. His team works on mapping the intricate neural circuits in the brain to understand how network structure gives rise to cognition.",
+        "type": "human",
+        "role": "Panelist",
+        "avatarIdle": "",
+        "avatarTalking": "",
+        "avatarListening": "",
+        "avatarThinking": ""
+      }
+    ],
+    "roles": [
+      {
+        "name": "Moderator",
+        "description": "Facilitates the discussion and operates the visualization tools to provide concrete examples for debate."
+      },
+      {
+        "name": "Panelist",
+        "description": "Provides expert commentary on network structures from their domain and discusses the common principles that emerge across different types of networks."
+      }
+    ]
+  }

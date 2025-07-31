@@ -1,0 +1,55 @@
+{
+  "event": {
+    "background": "",
+    "name": "From Pages to Pixels: How Modern Media Reshapes Our Stories",
+    "description": "This event is a comparative analysis of how stories are told across different mediums—from classic literature to today's binge-worthy TV series. Students will explore how narrative structure, character development, and audience engagement have evolved.",
+    "dynamics": "A \"show and tell\" format. Each student will choose a book and its film or TV adaptation, and present a brief case study on what was gained, lost, or changed in the translation. The rest of the group will then discuss the findings.",
+    "language": "en-US"
+  },
+  "participants": [
+    {
+      "type": "human",
+      "avatarIdle": "",
+      "avatarListening": "",
+      "avatarThinking": "",
+      "avatarTalking": "",
+      "name": "Sarah Davies",
+      "bio": "Sarah is a devoted reader who believes a book's ability to create a world in your imagination is unmatched. She's prepared to discuss the details missed in the movie adaptation of Dune.",
+      "role": "The Literary Purist"
+    },
+    {
+      "type": "human",
+      "avatarIdle": "",
+      "avatarListening": "",
+      "avatarThinking": "",
+      "avatarTalking": "",
+      "name": "Leo Grant",
+      "bio": "Leo loves how a good adaptation can introduce a story to a new audience. He's an expert on the Game of Thrones series and is ready to defend how the show's changes often improved the story's pacing and drama.",
+      "role": "The Adaptation Enthusiast"
+    },
+    {
+      "type": "human",
+      "avatarIdle": "",
+      "avatarListening": "",
+      "avatarThinking": "",
+      "avatarTalking": "",
+      "name": "Fatima Hassan",
+      "bio": "Fatima is an aspiring filmmaker. She's more interested in the technical side of storytelling—things like cinematography, editing, and sound design. She'll be focusing on how the film adaptation of The Lord of the Rings used these elements to create its epic scale.",
+      "role": "The Technical Analyst"
+    }
+  ],
+  "roles": [
+    {
+      "name": "The Literary Purist",
+      "description": "A student who believes the original book is almost always superior to its adaptation."
+    },
+    {
+      "name": "The Adaptation Enthusiast",
+      "description": "A student who celebrates the new creative possibilities and interpretations that come with adapting a story for the screen."
+    },
+    {
+      "name": "The Technical Analyst",
+      "description": "A student who focuses on the technical aspects of filmmaking and screenwriting that influence storytelling."
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+    "event": {
+      "background": "",
+      "name": "Project Mercury Proposal Review",
+      "description": "A formal meeting to discuss and evaluate a new project proposal, codenamed 'Project Mercury.' Directors from key departments will provide feedback on its feasibility, market potential, and strategic alignment with company goals.",
+      "dynamics": "The project leader will present the proposal, followed by a moderated discussion among the directors. The secretary will document key points, decisions, and action items. The meeting will conclude with a summary of tasks and next steps.",
+      "language": "en-US"
+    },
+    "participants": [
+      {
+        "type": "human",
+        "avatarIdle": "",
+        "avatarListening": "",
+        "avatarThinking": "",
+        "avatarTalking": "",
+        "name": "Evelyn Reed",
+        "bio": "Evelyn is the Director of Technology with a Ph.D. in Computer Science from Stanford University. With over 15 years of experience in software development and innovation, she leads the company's R&D efforts and has been instrumental in securing several key technology patents.",
+        "role": "Director of Technology"
+      },
+      {
+        "type": "human",
+        "avatarIdle": "",
+        "avatarListening": "",
+        "avatarThinking": "",
+        "avatarTalking": "",
+        "name": "Markus Vance",
+        "bio": "Markus holds an MBA from Harvard Business School and is the Director of Marketing. He has a decade of experience in brand strategy and market analysis, having successfully launched multiple products that have achieved significant market share. His expertise lies in identifying consumer trends and developing effective go-to-market strategies.",
+        "role": "Director of Marketing"
+      },
+      {
+        "type": "human",
+        "avatarIdle": "",
+        "avatarListening": "",
+        "avatarThinking": "",
+        "avatarTalking": "",
+        "name": "Sara Chen",
+        "bio": "Sara serves as the Executive Secretary, holding a Master's degree in Business Administration. She is highly proficient in project management and corporate communications. Sara is responsible for maintaining meeting records, distributing minutes, and ensuring all follow-up tasks are properly tracked and executed.",
+        "role": "Secretary"
+      }
+    ],
+    "roles": [
+      {
+        "name": "Director of Technology",
+        "description": "Provides expert analysis on the technical requirements, challenges, and innovative aspects of the project proposal."
+      },
+      {
+        "name": "Director of Marketing",
+        "description": "Evaluates the project's market viability, target audience, competitive landscape, and potential for brand impact."
+      },
+      {
+        "name": "Secretary",
+        "description": "Manages the meeting flow, records meeting minutes, and summarizes action items, assigned tasks, and deadlines for each participant."
+      }
+    ]
+  }

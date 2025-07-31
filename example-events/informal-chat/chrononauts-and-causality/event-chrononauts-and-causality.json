@@ -1,0 +1,55 @@
+{
+  "event": {
+    "background": "",
+    "name": "Chrononauts and Causality: A Debate on the Possibility of Time Travel",
+    "description": "This event will be a mind-bending debate on the scientific and philosophical feasibility of time travel. The panel will discuss topics such as the Grandfather Paradox, the physics of wormholes and black holes, and why we haven't been visited by tourists from the future.",
+    "dynamics": "A structured debate with three rounds. Round 1: Each panelist presents their argument for or against time travel. Round 2: The panelists engage in a moderated discussion and address each other's points. Round 3: The audience asks questions, and the panelists provide closing remarks.",
+    "language": "en-US"
+  },
+  "participants": [
+    {
+      "type": "Microsoft David - English (United States)",
+      "avatarIdle": "",
+      "avatarListening": "",
+      "avatarThinking": "",
+      "avatarTalking": "",
+      "name": "Dr. Aris Thorne",
+      "bio": "Dr. Thorne is a leading theoretical physicist with a Ph.D. from Caltech. His work focuses on general relativity and quantum mechanics, with several published papers on wormhole stability and spacetime geometry in peer-reviewed journals. He was awarded the prestigious Einstein Medal for his contributions to theoretical physics.",
+      "role": "The Physicist"
+    },
+    {
+      "type": "Microsoft Zira - English (United States)",
+      "avatarIdle": "",
+      "avatarListening": "",
+      "avatarThinking": "",
+      "avatarTalking": "",
+      "name": "Dr. Lena Petrova",
+      "bio": "Dr. Petrova is a highly respected philosopher with a Ph.D. in Metaphysics from Oxford University. Her research centers on causality, identity, and the logic of time. She is the author of the book 'The Logic of Loops: Paradoxes in Time and Existence' and is a sought-after speaker at international philosophy conferences.",
+      "role": "The Philosopher"
+    },
+    {
+      "type": "Microsoft David - English (United States)",
+      "avatarIdle": "",
+      "avatarListening": "",
+      "avatarThinking": "",
+      "avatarTalking": "",
+      "name": "Alex Vance",
+      "bio": "Alex Vance is an acclaimed science fiction author known for a series of novels exploring time-travel paradoxes. A graduate of NYU's film school, Vance has also worked as a screenwriter for several major studio films. Their work has been nominated for a Hugo Award, and they frequently appear as a consultant on projects involving complex sci-fi concepts.",
+      "role": "The Storyteller"
+    }
+  ],
+  "roles": [
+    {
+      "name": "The Physicist",
+      "description": "A scientist who explains the theoretical possibilities of time travel based on our current understanding of physics."
+    },
+    {
+      "name": "The Philosopher",
+      "description": "A thinker who focuses on the logical and metaphysical problems associated with time travel, such as paradoxes and the nature of free will."
+    },
+    {
+      "name": "The Storyteller",
+      "description": "A pop culture expert who uses examples from fiction to make complex scientific ideas more accessible and engaging for the audience."
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+ {
+  "event": {
+    "background": "",
+    "name": "Dream Big: A Career Exploration for Young Minds",
+    "description": "A unique career guidance session designed for primary school students. This event aims to inspire young minds by introducing them to different professions and showing them that every job, no matter how big or small, starts with curiosity and passion.",
+    "dynamics": "A 45-minute interactive session. The primary school student will ask questions to the professionals, and the parent will add a layer of perspective on how to nurture a child's passions. The format is a fun, light-hearted Q&A rather than a formal panel.",
+    "language": "en-US"
+  },
+  "participants": [
+    {
+      "type": "human",
+      "avatarIdle": "",
+      "avatarListening": "",
+      "avatarThinking": "",
+      "avatarTalking": "",
+      "name": "Maya Singh",
+      "bio": "A bright and curious 8-year-old student. She will ask the questions that are on the minds of her peers, such as 'Do you get to play with brains all day?' and 'What's the coolest thing you've ever built?'",
+      "role": "The Curious Student"
+    },
+    {
+      "type": "human",
+      "avatarIdle": "",
+      "avatarListening": "",
+      "avatarThinking": "",
+      "avatarTalking": "",
+      "name": "Dr. Evelyn Reed",
+      "bio": "A leading neurosurgeon at a top university hospital. She will simplify her complex job, focusing on the problem-solving and teamwork aspects, and share her journey from being a curious child to a doctor.",
+      "role": "The Neurosurgeon"
+    },
+    {
+      "type": "human",
+      "avatarIdle": "",
+      "avatarListening": "",
+      "avatarThinking": "",
+      "avatarTalking": "",
+      "name": "Alex Carter",
+      "bio": "A parent of a primary school student. Alex will provide insights on how to support a child's developing interests and the importance of encouraging exploration over early specialization.",
+      "role": "The Parent"
+    },
+    {
+      "type": "human",
+      "avatarIdle": "",
+      "avatarListening": "",
+      "avatarThinking": "",
+      "avatarTalking": "",
+      "name": "Victoria Hayes",
+      "bio": "The CEO of a successful technology startup. Victoria will talk about her career path, emphasizing the importance of creativity, collaboration, and resilience, and how her childhood interests shaped her adult career.",
+      "role": "The CEO"
+    }
+  ],
+  "roles": [
+    {
+      "name": "The Curious Student",
+      "description": "A primary school student who asks questions and provides the youthful perspective on career aspirations."
+    },
+    {
+      "name": "The Neurosurgeon",
+      "description": "A medical professional who will make a complex career accessible and inspiring for young children."
+    },
+    {
+      "name": "The Parent",
+      "description": "Represents the adult perspective on how to guide and support a child's career exploration."
+    },
+    {
+      "name": "The CEO",
+      "description": "A business leader who will share how personal interests and skills developed in childhood can lead to a successful career."
+    }
+  ]
+}

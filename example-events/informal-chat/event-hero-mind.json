@@ -1,0 +1,55 @@
+{
+  "event": {
+    "background": "",
+    "name": "The Hero's Mind: A Deep Dive into Pop Culture's Greatest Characters",
+    "description": "This discussion explores the motivations, ethical dilemmas, and psychological traits of iconic heroes and villains from comics, movies, and TV shows. Students will debate whether villains are products of their environment or inherently evil, and how the classic \"hero's journey\" archetype still resonates today.",
+    "dynamics": "The discussion will be moderated, with students taking turns presenting their arguments and responding to counterpoints from their peers. The moderator will introduce specific character case studies to keep the conversation focused.",
+    "language": "en-US"
+  },
+  "participants": [
+    {
+      "type": "human",
+      "avatarIdle": "",
+      "avatarListening": "",
+      "avatarThinking": "",
+      "avatarTalking": "",
+      "name": "Samira Khan",
+      "bio": "A huge fan of the Marvel Cinematic Universe, Samira enjoys exploring the complex moral questions posed by characters like Thanos and Captain America. She's known for her ability to keep a conversation moving and include everyone's perspective.",
+      "role": "The Moderator"
+    },
+    {
+      "type": "human",
+      "avatarIdle": "",
+      "avatarListening": "",
+      "avatarThinking": "",
+      "avatarTalking": "",
+      "name": "Marcus Chen",
+      "bio": "Marcus loves playing the villain's advocate. He believes that every character, no matter how evil, has a backstory that makes their actions understandable, if not forgivable. He's an expert on the DC universe, particularly the Joker's various origins.",
+      "role": "The Devil's Advocate"
+    },
+    {
+      "type": "human",
+      "avatarIdle": "",
+      "avatarListening": "",
+      "avatarThinking": "",
+      "avatarTalking": "",
+      "name": "Lily Rodriguez",
+      "bio": "Lily is a meticulous researcher who loves to break down the \"why\" behind a character's choices. She's a major fan of Star Wars and is prepared to discuss the psychological breakdown of Anakin Skywalker in great detail.",
+      "role": "The Character Analyst"
+    }
+  ],
+  "roles": [
+    {
+      "name": "The Moderator",
+      "description": "A student who will facilitate the discussion, introduce topics, and ensure everyone has a chance to speak."
+    },
+    {
+      "name": "The Devil's Advocate",
+      "description": "A student who challenges conventional thinking and argues from a different perspective to provoke deeper discussion."
+    },
+    {
+      "name": "The Character Analyst",
+      "description": "A student who provides detailed insights into the backstories and psychological makeup of specific characters."
+    }
+  ]
+}

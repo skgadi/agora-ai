@@ -1,0 +1,55 @@
+{
+  "event": {
+    "background": "",
+    "name": "The Scroll of Fortune: Navigating the World of Online Influence",
+    "description": "This event will be a lively debate about the rise of the influencer economy. Students will discuss the business side of social media, the mental health implications of living a public life, and whether \"influencing\" is a sustainable career path.",
+    "dynamics": "A panel discussion format where each student presents a different perspective (e.g., the optimist, the skeptic, the analyst) followed by a Q&A session with the rest of the group.",
+    "language": "en-US"
+  },
+  "participants": [
+    {
+      "type": "human",
+      "avatarIdle": "",
+      "avatarListening": "",
+      "avatarThinking": "",
+      "avatarTalking": "",
+      "name": "Javier Mendez",
+      "bio": "Javier runs a small online store and understands the mechanics of digital marketing firsthand. He's here to explain concepts like brand partnerships, ad revenue, and the \"creator economy\" from a business perspective.",
+      "role": "The Business Analyst"
+    },
+    {
+      "type": "human",
+      "avatarIdle": "",
+      "avatarListening": "",
+      "avatarThinking": "",
+      "avatarTalking": "",
+      "name": "Chloe Kim",
+      "bio": "An avid follower of various social media trends, Chloe is concerned about the pressure for perfection and the rise of comparison culture. She's ready to discuss the psychological toll of being constantly online.",
+      "role": "The Social Critic"
+    },
+    {
+      "type": "human",
+      "avatarIdle": "",
+      "avatarListening": "",
+      "avatarThinking": "",
+      "avatarTalking": "",
+      "name": "Ethan Williams",
+      "bio": "Ethan has a popular gaming channel on YouTube and is actively trying to grow his following. He'll share his personal experiences with content creation, from the thrill of a viral video to the burnout that comes with consistency.",
+      "role": "The Aspiring Creator"
+    }
+  ],
+  "roles": [
+    {
+      "name": "The Business Analyst",
+      "description": "A student who focuses on the economic and marketing aspects of the influencer industry."
+    },
+    {
+      "name": "The Social Critic",
+      "description": "A student who addresses the mental health and societal impacts of social media on individuals and culture."
+    },
+    {
+      "name": "The Aspiring Creator",
+      "description": "A student who is genuinely interested in content creation and can speak to the practical challenges and opportunities."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+    "event": {
+      "background": "",
+      "name": "Circuit Analysis Study Session",
+      "description": "A focused, one-on-one peer tutoring session where a senior engineering student helps a junior student with a difficult circuit analysis problem set. The session aims to clarify complex concepts, review problem-solving techniques, and prepare for an upcoming exam.",
+      "dynamics": "The senior student will act as a tutor, guiding the junior student through problems without simply providing answers. The session will be interactive, encouraging the junior to articulate their thought process and ask questions. The environment is collaborative and supportive.",
+      "language": "en-US"
+    },
+    "participants": [
+      {
+        "type": "human",
+        "avatarIdle": "",
+        "avatarListening": "",
+        "avatarThinking": "",
+        "avatarTalking": "",
+        "name": "David Carter",
+        "bio": "David is a third-year Electrical Engineering student at MIT. He is struggling with advanced circuit theory and is looking for a way to better grasp the concepts of Thevenin and Norton equivalents before his mid-term exam. He has a strong interest in robotics but finds the theoretical side of his coursework challenging.",
+        "role": "The Junior Student"
+      },
+      {
+        "type": "human",
+        "avatarIdle": "",
+        "avatarListening": "",
+        "avatarThinking": "",
+        "avatarTalking": "",
+        "name": "Elena Rodriguez",
+        "bio": "Elena is a senior in Electrical Engineering at MIT with a 4.0 GPA. She has an internship at a leading technology company and has previously been a teaching assistant for the Circuits 101 course. Her research focuses on microelectronics, and she excels at explaining difficult concepts in an easy-to-understand way.",
+        "role": "The Senior Tutor"
+      }
+    ],
+    "roles": [
+      {
+        "name": "The Junior Student",
+        "description": "An engineering student seeking help with a specific subject, willing to engage with the material and ask questions."
+      },
+      {
+        "name": "The Senior Tutor",
+        "description": "A more experienced engineering student who provides guidance and a different perspective to help the junior student understand the material."
+      }
+    ]
+  }

@@ -1,0 +1,61 @@
+{
+    "event": {
+      "background": "",
+      "name": "The Unseen Hand: A Dialogue on Emergence",
+      "description": "An interdisciplinary panel exploring how complex, organized systems like markets, ecosystems, and cities arise from simple, individual actions without a central coordinator.",
+      "dynamics": "A 90-minute session. The moderator will introduce the core concept and pose initial questions for 45 minutes. The remaining 45 minutes will be dedicated to a cross-panel debate and an open Q&A with the audience.",
+      "language": "en-US"
+    },
+    "participants": [
+      {
+        "type": "human",
+        "avatarIdle": "",
+        "avatarListening": "",
+        "avatarThinking": "",
+        "avatarTalking": "",
+        "name": "Dr. Anya Sharma",
+        "bio": "Professor of Philosophy of Science at Stanford University. Dr. Sharma's work focuses on the epistemological boundaries between scientific disciplines and how different fields construct models of reality.",
+        "role": "Moderator"
+      },
+      {
+        "type": "human",
+        "avatarIdle": "",
+        "avatarListening": "",
+        "avatarThinking": "",
+        "avatarTalking": "",
+        "name": "Dr. Kenji Tanaka",
+        "bio": "Physicist from Caltech specializing in statistical mechanics. His research on self-organized criticality in granular materials provides a physical model for emergent behavior.",
+        "role": "Panelist"
+      },
+      {
+        "type": "human",
+        "avatarIdle": "",
+        "avatarListening": "",
+        "avatarThinking": "",
+        "avatarTalking": "",
+        "name": "Dr. Elena Petrova",
+        "bio": "An expert in Evolutionary Developmental Biology (Evo-Devo) from the University of Cambridge. Her work investigates how simple gene regulatory networks guide the development of complex organisms.",
+        "role": "Panelist"
+      },
+      {
+        "name": "Dr. Marcus Thorne",
+        "bio": "An economist from the University of Chicago whose research uses agent-based computational models to study the emergence of market dynamics and spontaneous order.",
+        "type": "human",
+        "role": "Panelist",
+        "avatarIdle": "",
+        "avatarTalking": "",
+        "avatarListening": "",
+        "avatarThinking": ""
+      }
+    ],
+    "roles": [
+      {
+        "name": "Moderator",
+        "description": "Facilitates the discussion, ensures a balance of speaking time, poses questions, and fields queries from the audience."
+      },
+      {
+        "name": "Panelist",
+        "description": "An expert academic who provides insights and arguments based on their specific field of study, contributing to the broader interdisciplinary conversation."
+      }
+    ]
+  }

@@ -1,2 +1,85 @@
-# pai
-Panelist AI
+# AgoraAI: A Multi-Agent Conversational Framework
+
+[![GitHub Repository](https://img.shields.io/badge/GitHub-skgadi%2Fagora--ai-blue)](https://github.com/skgadi/agora-ai)
+[![Docker Pulls](https://img.shields.io/docker/pulls/skgadi/sigrama-agora-ai?color=orange)](https://hub.docker.com/r/skgadi/sigrama-agora-ai)
+[![License](https://img.shields.io/badge/License-Open--Source-green)](LICENSE)
+
+## 🌟 Overview
+
+**AgoraAI** is an open-source platform designed to overcome the limitations of single-persona Large Language Model (LLM) interactions. AgoraAI enables users to configure and deploy multiple distinct AI agents capable of simultaneous communication within a shared environment, interacting both with each other and with multiple human participants.
+
+This multi-agent architecture facilitates more fluid and enriched discussions, allowing users to explore topics from diverse perspectives by leveraging the versatility of concurrent AI personas. The entire application is delivered as a **full-stack solution**.
+
+## ✨ Key Features
+
+*   **Multi-Agent Deployment:** Supports the configuration and simultaneous deployment of distinct AI personas within a single conversational event.
+*   **Context-Aware Generation:** AI participants generate responses based on a comprehensive, dynamically constructed prompt.
+*   **Comprehensive State Management:** The back-end maintains a complete state of the simulated event, serving as the single source of truth.
+*   **Post-Event Reporting and Transcript Management:** The administrative interface allows users to:
+    *   Generate a **Full Event Report** that includes event details, defined roles, participant information, and the full transcript.
+    *   **Download Transcript:** Download the conversation history (including Speech-to-Text results and AI-generated responses) for backup.
+    *   **Upload Transcript:** Restore a previously downloaded transcript history, replacing the existing conversational history.
+*   **Conversational State Transition:** The system transitions from the Setup State to the Conversational State upon transmitting configured event data to the server.
+*   **Control Mechanisms:** Includes features to forcibly interrupt AI speech or trigger a response.
+
+## 💻 Technology Stack
+
+AgoraAI leverages modern generative AI capabilities and robust state management.
+
+### Front-end (`/client`)
+
+The user interface is built upon a modern, robust technology stack chosen to ensure performance, maintainability, and a rich user experience.
+
+*   **Core Framework:** The application is developed using **Vue.js 3** with the Composition API, enhanced by the **Quasar Framework**.
+*   **Deployment:** Quasar provides out-of-the-box support for **Progressive Web Applications (PWA)**.
+*   **Language:** **TypeScript** is used throughout the project to enforce static typing, improving code quality and long-term maintainability.
+*   **Source Location:** The frontend source code is available in the `/client` directory and uses **Yarn** as its package manager.
+
+### Back-end (`/server`)
+
+The back-end focuses on reliable state management and real-time communication.
+
+*   **Core Technology:** **Node.js** along with **Socket.IO** was selected to handle high scalability and real-time, bi-directional communication via web-sockets.
+*   **Language:** The back-end is implemented using **TypeScript**.
+*   **LLM Integration:** Handles centralized API key initialization and interaction with the generative model.
+*   **Source Location:** The backend source code resides in the `/server` directory.
+
+## 🚀 Getting Started
+
+The easiest way to deploy AgoraAI is using Docker.
+
+### Prerequisites
+
+*   Docker installed on your system.
+*   A Google Generative AI API Key (required to utilize the LLM model).
+
+### Installation via Docker Hub
+
+You can pull the latest stable image from our Docker Hub repository:
+
+```bash
+docker pull skgadi/sigrama-agora-ai
+```
+
+### Running the Container
+
+```bash
+# Example Startup (Requires setting the GEMINI_API_KEY environment variable)
+docker run -d -p 3000:3000 -e GEMINI_API_KEY="YOUR_API_KEY" skgadi/sigrama-agora-ai
+```
+
+Access the application in your browser at `http://localhost:3000`.
+
+## 📚 Repository Structure and Sources
+
+The source code is fully open and available here:
+
+**GitHub Repository:**
+`https://github.com/skgadi/agora-ai`
+
+**Docker Hub:**
+`https://hub.docker.com/r/skgadi/sigrama-agora-ai`
+
+## 🔬 Scientific Contribution
+
+The underlying design and architecture of the AgoraAI framework have been submitted to a scientific journal for formal peer review and publication.

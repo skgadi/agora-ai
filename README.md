@@ -64,11 +64,31 @@ docker pull skgadi/sigrama-agora-ai
 ### Running the Container
 
 ```bash
-# Example Startup (Requires setting the GEMINI_API_KEY environment variable)
-docker run -d -p 3000:3000 -e GEMINI_API_KEY="YOUR_API_KEY" skgadi/sigrama-agora-ai
+# Example Startup (Requires setting the MY_PAI_GEMINI_API_KEY environment variable)
+docker run -d -p 3000:3000 -e MY_PAI_GEMINI_API_KEY="YOUR_API_KEY" skgadi/sigrama-agora-ai
 ```
 
-Access the application in your browser at `http://localhost:3000`.
+Access the application in your browser at `http://localhost:3000` and admin page at `http://localhost:3000/admin`. The admin page needs a password. The password can be set by congiuring the environment variable `MY_PAI_ADMIN_PASSWORD`. 
+
+A possible example for `docker-compose.yml` is:
+
+```yaml
+version: '3.8' # Specify the Docker Compose file format version
+
+services:
+  agora-ai: # Define a service named 'agora-ai'
+    image: skgadi/sigrama-agora-ai:latest # Specify the Docker image to use
+    container_name: temp-suresh-agora-ai # Optional: Assign a custom name to the container
+    restart: unless-stopped # Ensure the container restarts automatically unless explicitly stopped
+
+    # Define environment variables for the container
+    environment:
+      MY_PAI_GEMINI_API_KEY: "AaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaA" # Replace with your actual Gemini API key
+      MY_PAI_ADMIN_PASSWORD: "1234" # Replace with your desired admin password
+    # it will now be accessible on port 8080 of your host machine.
+    ports:
+      - "8080:3000" # Host port 8080 mapped to container port 3000
+```
 
 ## 📚 Repository Structure and Sources
 
